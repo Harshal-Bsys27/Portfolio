@@ -1,4 +1,56 @@
-// Mobile Navigation Toggle
+// ========================================
+//  CREATIVE PORTFOLIO - JAVASCRIPT
+// ========================================
+
+// Initialize AOS (Animate On Scroll)
+AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    offset: 100
+});
+
+// ========================================
+// PRELOADER
+// ========================================
+window.addEventListener('load', () => {
+    const preloader = document.querySelector('.preloader');
+    setTimeout(() => {
+        preloader.classList.add('hidden');
+        setTimeout(() => preloader.remove(), 500);
+    }, 1500);
+});
+
+// ========================================
+// CUSTOM CURSOR
+// ========================================
+const cursor = document.querySelector('.cursor');
+const cursorGlow = document.querySelector('.cursor-glow');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+});
+
+// Cursor interactions
+document.querySelectorAll('a, button, .project-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        cursorGlow.style.transform = 'translate(-50%, -50%) scale(1.5)';
+    });
+    
+    el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorGlow.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+});
+
+// ========================================
+// NAVIGATION
+// ========================================
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 
@@ -7,27 +59,31 @@ hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
 });
 
-// Smooth Scrolling
+// Close menu on link click
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+    });
+});
+
+// Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        
         if (target) {
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
-            
-            // Close mobile menu if open
-            navLinks.classList.remove('active');
         }
     });
 });
 
-// Active Navigation Link on Scroll
+// Active nav on scroll
 const sections = document.querySelectorAll('section');
-const navItems = document.querySelectorAll('.nav-links a');
+const navItems = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
     let current = '';
@@ -46,124 +102,279 @@ window.addEventListener('scroll', () => {
             item.classList.add('active');
         }
     });
+    
+    // Navbar background on scroll
+    const navbar = document.querySelector('.navbar');
+    if (scrollY > 100) {
+        navbar.style.background = 'rgba(10, 14, 39, 0.95)';
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+    } else {
+        navbar.style.background = 'rgba(10, 14, 39, 0.8)';
+        navbar.style.boxShadow = 'none';
+    }
 });
 
-// Form Submission Handler
+// ========================================
+// TYPING EFFECT
+// ========================================
+const typingText = document.querySelector('.typing-text');
+const texts = [
+    'CSE AIML Student',
+    'AI/ML Enthusiast',
+    'Full Stack Developer',
+    'Problem Solver',
+    'Python Developer'
+];
+
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function type() {
+    const currentText = texts[textIndex];
+    
+    if (isDeleting) {
+        typingText.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        typingText.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+    }
+    
+    if (!isDeleting && charIndex === currentText.length) {
+        setTimeout(() => isDeleting = true, 2000);
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+    }
+    
+    const typingSpeed = isDeleting ? 50 : 100;
+    setTimeout(type, typingSpeed);
+}
+
+// Start typing effect after page load
+setTimeout(type, 2000);
+
+// ========================================
+// COUNTER ANIMATION
+// ========================================
+const counters = document.querySelectorAll('.stat-number');
+let counterStarted = false;
+
+function animateCounters() {
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                counter.textContent = Math.ceil(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target + (target === 100 ? '+' : '');
+            }
+        };
+        
+        updateCounter();
+    });
+}
+
+// Trigger counter animation on scroll
+window.addEventListener('scroll', () => {
+    const aboutSection = document.querySelector('#about');
+    if (aboutSection && !counterStarted) {
+        const rect = aboutSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            counterStarted = true;
+            animateCounters();
+        }
+    }
+});
+
+// ========================================
+// SKILL PROGRESS ANIMATION
+// ========================================
+const skillSection = document.querySelector('#skills');
+let skillsAnimated = false;
+
+window.addEventListener('scroll', () => {
+    if (skillSection && !skillsAnimated) {
+        const rect = skillSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            skillsAnimated = true;
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+    }
+});
+
+// ========================================
+// FORM SUBMISSION
+// ========================================
 const contactForm = document.querySelector('.contact-form');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    // Get form values
-    const name = contactForm.querySelector('input[type="text"]').value;
-    const email = contactForm.querySelector('input[type="email"]').value;
-    const subject = contactForm.querySelectorAll('input[type="text"]')[1].value;
-    const message = contactForm.querySelector('textarea').value;
+    const formData = new FormData(contactForm);
+    const data = Object.fromEntries(formData);
     
-    // Basic validation
-    if (name && email && subject && message) {
-        // Show success message (you can customize this)
-        alert('Thank you for your message! I will get back to you soon.');
+    // Simulate form submission
+    const submitBtn = contactForm.querySelector('.btn-primary');
+    const originalText = submitBtn.innerHTML;
+    
+    submitBtn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
+    submitBtn.disabled = true;
+    
+    setTimeout(() => {
+        submitBtn.innerHTML = '<span>Message Sent!</span> <i class="fas fa-check"></i>';
+        submitBtn.style.background = 'linear-gradient(135deg, #4ade80 0%, #22c55e 100%)';
         
         // Reset form
         contactForm.reset();
         
-        // In a real application, you would send this data to a server
-        console.log('Form Data:', { name, email, subject, message });
-    } else {
-        alert('Please fill in all fields.');
-    }
+        // Reset button after 3 seconds
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.style.background = '';
+            submitBtn.disabled = false;
+        }, 3000);
+        
+        // Show success message (you can customize this)
+        console.log('Form submitted:', data);
+        alert('Thank you! Your message has been sent successfully. I will get back to you soon!');
+    }, 2000);
 });
 
-// Add scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-        }
-    });
-}, observerOptions);
-
-// Observe all sections and cards
-document.querySelectorAll('section, .skill-card, .project-card, .stat').forEach(el => {
-    observer.observe(el);
-});
-
-// Add typing effect to hero tagline
-const tagline = document.querySelector('.tagline');
-const text = tagline.textContent;
-tagline.textContent = '';
-
-let i = 0;
-const typeWriter = () => {
-    if (i < text.length) {
-        tagline.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 100);
-    }
-};
-
-// Start typing effect after page load
-window.addEventListener('load', () => {
-    setTimeout(typeWriter, 500);
-});
-
-// Add parallax effect to hero section
+// ========================================
+// PARALLAX EFFECT
+// ========================================
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
-        heroContent.style.opacity = 1 - (scrolled / 500);
+    const parallaxElements = document.querySelectorAll('.gradient-orb');
+    
+    parallaxElements.forEach((el, index) => {
+        const speed = (index + 1) * 0.1;
+        el.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+});
+
+// ========================================
+// PROJECT CARD TILT EFFECT
+// ========================================
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+    });
+});
+
+// ========================================
+// FLOATING TECH ICONS ANIMATION
+// ========================================
+document.querySelectorAll('.floating-tech').forEach((tech, index) => {
+    setInterval(() => {
+        tech.style.transform = `translateY(${Math.sin(Date.now() / 1000 + index) * 10}px) rotate(${Math.sin(Date.now() / 2000) * 5}deg)`;
+    }, 50);
+});
+
+// ========================================
+// SCROLL TO TOP
+// ========================================
+const footerLink = document.querySelector('.footer-links a');
+if (footerLink) {
+    footerLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// ========================================
+// KEYBOARD NAVIGATION
+// ========================================
+document.addEventListener('keydown', (e) => {
+    // Press 'h' to go to home
+    if (e.key === 'h' && !e.ctrlKey) {
+        document.querySelector('#home').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Press 'p' to go to projects
+    if (e.key === 'p' && !e.ctrlKey) {
+        document.querySelector('#projects').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Press 'c' to go to contact
+    if (e.key === 'c' && !e.ctrlKey) {
+        document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
     }
 });
 
-// Dynamic year for footer
-const footerYear = document.querySelector('.footer p');
-if (footerYear) {
-    const currentYear = new Date().getFullYear();
-    footerYear.innerHTML = footerYear.innerHTML.replace('2026', currentYear);
+// ========================================
+// RESPONSIVE IMAGE LOADING
+// ========================================
+if ('loading' in HTMLImageElement.prototype) {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    images.forEach(img => {
+        img.src = img.src;
+    });
+} else {
+    // Fallback for browsers that don't support lazy loading
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+    document.body.appendChild(script);
 }
 
-// Add hover effect for project cards
-const projectCards = document.querySelectorAll('.project-card');
-projectCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-});
+// ========================================
+// CONSOLE MESSAGE
+// ========================================
+console.log('%c🚀 Harshal Barhate Portfolio', 'color: #667eea; font-size: 20px; font-weight: bold;');
+console.log('%cBuilt with ❤️ using HTML, CSS & JavaScript', 'color: #764ba2; font-size: 14px;');
+console.log('%cLooking for opportunities? Let\'s connect!', 'color: #f093fb; font-size: 14px;');
 
-// Skill card animation on hover
-const skillCards = document.querySelectorAll('.skill-card');
-skillCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        const icon = this.querySelector('.skill-icon');
-        icon.style.transform = 'rotateY(360deg)';
-        icon.style.transition = 'transform 0.6s ease';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        const icon = this.querySelector('.skill-icon');
-        icon.style.transform = 'rotateY(0deg)';
-    });
-});
+// ========================================
+// PERFORMANCE OPTIMIZATION
+// ========================================
+// Debounce function for scroll events
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 
-// Add loading animation
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
-console.log('Portfolio website loaded successfully! 🚀');
+// Add link for AOS CSS
+if (!document.querySelector('link[href*="aos"]')) {
+    const aosCSS = document.createElement('link');
+    aosCSS.rel = 'stylesheet';
+    aosCSS.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
+    document.head.appendChild(aosCSS);
+}
