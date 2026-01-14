@@ -3,24 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Harshal Barhate - Portfolio">
-    <title>Harshal Barhate | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Harshal Barhate - CSE AIML Student Portfolio">
+    <title>Harshal Barhate | CSE AIML Portfolio</title>
+    <link rel="stylesheet" href="style-new.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader-wrapper">
+            <div class="loader-circle"></div>
+            <div class="loader-text">HB</div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-glow"></div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <h2>Harshal<span>.dev</span></h2>
+                <span class="logo-icon">&#123;</span>
+                <span class="logo-text">Harshal<span class="accent">Barhate</span></span>
+                <span class="logo-icon">&#125;</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -32,45 +49,146 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        
         <div class="container">
-            <div class="hero-content">
-                <h1>Hi, I'm <span class="highlight">Harshal Barhate</span></h1>
-                <p class="tagline">CSE AIML Student | AI/ML Enthusiast | Full Stack Developer</p>
-                <p class="description">Third Year Engineering student passionate about building AI-powered solutions and scalable web applications. Open to internship opportunities.</p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            <div class="hero-grid">
+                <div class="hero-content" data-aos="fade-right">
+                    <div class="status-pill">
+                        <span class="pulse-dot"></span>
+                        Available for Internships
+                    </div>
+                    <h1 class="hero-title">
+                        Hi, I'm <br>
+                        <span class="gradient-text">Harshal Barhate</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        <span class="typing-text"></span>
+                        <span class="cursor-blink">|</span>
+                    </p>
+                    <p class="hero-description">
+                        Third Year CSE AIML student crafting AI-powered solutions and full-stack applications. Turning complex problems into elegant code.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn btn-primary">
+                            <span>View Projects</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <span>Get in Touch</span>
+                        </a>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/Harshal-Bsys27" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/harshal-barhate" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/harshalbarhate" target="_blank" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:harshal.barhate@example.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="social-links">
-                    <a href="https://github.com/Harshal-Bsys27" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/harshal-barhate" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://twitter.com/harshalbarhate" target="_blank"><i class="fab fa-twitter"></i></a>
+                
+                <div class="hero-visual" data-aos="fade-left">
+                    <div class="profile-card">
+                        <div class="card-glow"></div>
+                        <img src="https://ui-avatars.com/api/?name=Harshal+Barhate&size=500&background=667eea&color=fff&bold=true&font-size=0.4" alt="Harshal Barhate" class="profile-img">
+                        <div class="status-badge">
+                            <span class="badge-dot"></span>
+                            Open to Work
+                        </div>
+                    </div>
+                    <div class="floating-tech tech-1" data-aos="zoom-in" data-aos-delay="200">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="floating-tech tech-2" data-aos="zoom-in" data-aos-delay="400">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <div class="floating-tech tech-3" data-aos="zoom-in" data-aos-delay="600">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="floating-tech tech-4" data-aos="zoom-in" data-aos-delay="800">
+                        <i class="fab fa-node"></i>
+                    </div>
                 </div>
             </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Hello! I'm Harshal, a Third Year Computer Science Engineering student specializing in Artificial Intelligence and Machine Learning. I'm passionate about leveraging AI/ML technologies to solve real-world problems and building full-stack web applications.</p>
-                    <p>My journey includes developing computer vision systems, intelligent automation tools, and scalable web platforms. I'm actively seeking internship opportunities to apply my skills in challenging real-world scenarios and contribute to innovative projects.</p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>5+</h3>
-                            <p>Projects Completed</p>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Get to know me</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-content" data-aos="fade-right">
+                    <p class="about-text">
+                        I'm a <strong>Third Year Computer Science Engineering student</strong> specializing in Artificial Intelligence and Machine Learning. My passion lies in creating intelligent systems that solve real-world problems.
+                    </p>
+                    <p class="about-text">
+                        From computer vision models that save lives to full-stack platforms that simplify daily tasks, I love building products that make a difference. Currently exploring opportunities to contribute my skills through internships.
+                    </p>
+                    
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="highlight-info">
+                                <h4>Education</h4>
+                                <p>B.Tech in CSE (AIML)</p>
+                            </div>
                         </div>
-                        <div class="stat">
-                            <h3>T.E.</h3>
-                            <p>CSE AIML Student</p>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="highlight-info">
+                                <h4>Location</h4>
+                                <p>Mumbai, India</p>
+                            </div>
                         </div>
-                        <div class="stat">
-                            <h3>Open</h3>
-                            <p>For Internships</p>
+                    </div>
+                </div>
+                
+                <div class="about-stats" data-aos="fade-left">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
                         </div>
+                        <h3 class="stat-number" data-target="5">0</h3>
+                        <p class="stat-label">Projects Completed</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="stat-number" data-target="10">0</h3>
+                        <p class="stat-label">Technologies</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="stat-number" data-target="100">0</h3>
+                        <p class="stat-label">Commits This Year</p>
                     </div>
                 </div>
             </div>
@@ -80,47 +198,76 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">My Skills</h2>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">My Expertise</span>
+                <h2 class="section-title">Technical Skills</h2>
+            </div>
+            
             <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fab fa-python"></i></div>
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="skill-icon python">
+                        <i class="fab fa-python"></i>
+                    </div>
                     <h3>Python</h3>
-                    <p>Flask, FastAPI, Data Processing, Automation</p>
+                    <p>Flask, FastAPI, Data Processing</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 90%"></div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="skill-icon ai">
+                        <i class="fas fa-brain"></i>
+                    </div>
                     <h3>AI/ML</h3>
-                    <p>Computer Vision, YOLO, NLP, Model Training</p>
+                    <p>Computer Vision, YOLO, NLP</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 85%"></div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fab fa-react"></i></div>
+                
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="skill-icon react">
+                        <i class="fab fa-react"></i>
+                    </div>
                     <h3>React</h3>
-                    <p>Material UI, State Management, Hooks</p>
+                    <p>Material UI, State Management</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 88%"></div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-robot"></i></div>
-                    <h3>Deep Learning</h3>
-                    <p>TensorFlow, PyTorch, Sentence Transformers</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-database"></i></div>
+                
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="400">
+                    <div class="skill-icon db">
+                        <i class="fas fa-database"></i>
+                    </div>
                     <h3>Databases</h3>
                     <p>MongoDB, SQLite, SQLAlchemy</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 82%"></div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fab fa-flutter"></i></div>
+                
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="500">
+                    <div class="skill-icon flutter">
+                        <i class="fab fa-flutter"></i>
+                    </div>
                     <h3>Flutter</h3>
-                    <p>Cross-platform mobile app development</p>
+                    <p>Cross-platform Mobile Apps</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 75%"></div>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="600">
+                    <div class="skill-icon git">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
                     <h3>Git & GitHub</h3>
-                    <p>Version control and collaboration</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-server"></i></div>
-                    <h3>Full Stack</h3>
-                    <p>Flask, REST APIs, JWT, Deployment (Render)</p>
+                    <p>Version Control, Collaboration</p>
+                    <div class="skill-progress">
+                        <div class="progress-bar" style="width: 90%"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -129,89 +276,146 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">My Work</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image project-inprogress">
+                <!-- Project 1: CoastVision -->
+                <div class="project-card featured" data-aos="fade-up">
+                    <div class="project-badge">In Progress</div>
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=500&fit=crop&q=80" alt="Beach Surveillance">
                         <div class="project-overlay">
-                            <a href="https://github.com/Harshal-Bsys27" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                            <a href="https://github.com/Harshal-Bsys27" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="project-info">
-                        <h3>🚧 CoastVision <span class="badge-progress">In Progress</span></h3>
-                        <p>AI-based beach surveillance system for real-time swimmer and drowning detection with zone-wise monitoring dashboard and Flutter mobile app.</p>
-                        <div class="project-tags">
-                            <span>YOLO</span>
-                            <span>Computer Vision</span>
-                            <span>Flutter</span>
-                            <span>Python</span>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            <i class="fas fa-video"></i>
+                            CoastVision
+                        </h3>
+                        <p class="project-desc">
+                            AI-based beach surveillance system for real-time swimmer and drowning detection with zone-wise monitoring dashboard and Flutter lifeguard mobile app.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">YOLO</span>
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                        <div class="project-stats">
+                            <span><i class="fas fa-star"></i> Featured</span>
+                            <span><i class="fas fa-code-branch"></i> Active</span>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+
+                <!-- Project 2: LetsTravel -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=500&fit=crop&q=80" alt="Travel Booking">
                         <div class="project-overlay">
-                            <a href="https://github.com/Harshal-Bsys27" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                            <a href="https://github.com/Harshal-Bsys27" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="project-info">
-                        <h3>LetsTravel</h3>
-                        <p>Full-stack travel booking platform with personalized itinerary generation, checkout flow, PDF ticket downloads, and admin dashboard.</p>
-                        <div class="project-tags">
-                            <span>Flask</span>
-                            <span>MongoDB</span>
-                            <span>ReportLab</span>
-                            <span>Render</span>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            <i class="fas fa-plane"></i>
+                            LetsTravel
+                        </h3>
+                        <p class="project-desc">
+                            Full-stack travel booking platform with personalized itinerary generation, checkout flow, PDF ticket downloads, and admin dashboard.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">ReportLab</span>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+
+                <!-- Project 3: HireLens -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=500&fit=crop&q=80" alt="Resume Analyzer">
                         <div class="project-overlay">
-                            <a href="https://github.com/Harshal-Bsys27" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                            <a href="https://github.com/Harshal-Bsys27" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="project-info">
-                        <h3>HireLens</h3>
-                        <p>AI-powered resume analyzer that extracts skills, checks ATS-friendly structure, and generates detailed PDF reports with improvement suggestions.</p>
-                        <div class="project-tags">
-                            <span>React</span>
-                            <span>Flask</span>
-                            <span>NLP</span>
-                            <span>Tailwind</span>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            <i class="fas fa-file-alt"></i>
+                            HireLens
+                        </h3>
+                        <p class="project-desc">
+                            AI-powered resume analyzer with skill extraction, ATS-friendly structure checking, and detailed PDF report generation.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">Tailwind</span>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+
+                <!-- Project 4: AI Study Planner -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=500&fit=crop&q=80" alt="Study Planner">
                         <div class="project-overlay">
-                            <a href="https://github.com/Harshal-Bsys27" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                            <a href="https://github.com/Harshal-Bsys27" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="project-info">
-                        <h3>AI Study Planner</h3>
-                        <p>AI-powered study scheduler with personalized plans, progress tracking, and visual insights using charts.</p>
-                        <div class="project-tags">
-                            <span>React</span>
-                            <span>Flask</span>
-                            <span>MUI</span>
-                            <span>JWT</span>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            AI Study Planner
+                        </h3>
+                        <p class="project-desc">
+                            AI-powered study scheduler with personalized plans, progress tracking, and visual insights using interactive charts.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">MUI</span>
+                            <span class="tech-tag">JWT</span>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+
+                <!-- Project 5: Student Management -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=500&fit=crop&q=80" alt="Student Management">
                         <div class="project-overlay">
-                            <a href="https://github.com/Harshal-Bsys27" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
+                            <a href="https://github.com/Harshal-Bsys27" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="project-info">
-                        <h3>Student Management System</h3>
-                        <p>Full-stack application for managing student records with CRUD operations and structured dashboard UI.</p>
-                        <div class="project-tags">
-                            <span>Flask</span>
-                            <span>SQLite</span>
-                            <span>Bootstrap</span>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            <i class="fas fa-users"></i>
+                            Student Management System
+                        </h3>
+                        <p class="project-desc">
+                            Full-stack application for managing student records efficiently with CRUD operations and structured dashboard UI.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">Bootstrap</span>
                         </div>
                     </div>
                 </div>
@@ -222,36 +426,70 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Let's Work Together</h3>
-                    <p>I'm always interested in hearing about new projects and opportunities.</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>harshal.barhate@example.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Mumbai, India</span>
-                        </div>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Let's Connect</span>
+                <h2 class="section-title">Get In Touch</h2>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right">
+                    <h3>Let's build something amazing together!</h3>
+                    <p>I'm actively seeking internship opportunities where I can contribute my skills and learn from experienced professionals. Feel free to reach out!</p>
+                    
+                    <div class="contact-methods">
+                        <a href="mailto:harshal.barhate@example.com" class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-info">
+                                <span class="method-label">Email</span>
+                                <span class="method-value">harshal.barhate@example.com</span>
+                            </div>
+                        </a>
+                        
+                        <a href="https://linkedin.com/in/harshal-barhate" target="_blank" class="contact-method">
+                            <div class="method-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <div class="method-info">
+                                <span class="method-label">LinkedIn</span>
+                                <span class="method-value">@harshal-barhate</span>
+                            </div>
+                        </a>
+                        
+                        <a href="https://github.com/Harshal-Bsys27" target="_blank" class="contact-method">
+                            <div class="method-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="method-info">
+                                <span class="method-label">GitHub</span>
+                                <span class="method-value">@Harshal-Bsys27</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
-                <form class="contact-form">
+                
+                <form class="contact-form" data-aos="fade-left">
                     <div class="form-group">
                         <input type="text" placeholder="Your Name" required>
+                        <i class="fas fa-user"></i>
                     </div>
                     <div class="form-group">
                         <input type="email" placeholder="Your Email" required>
+                        <i class="fas fa-envelope"></i>
                     </div>
                     <div class="form-group">
                         <input type="text" placeholder="Subject" required>
+                        <i class="fas fa-tag"></i>
                     </div>
                     <div class="form-group">
                         <textarea placeholder="Your Message" rows="5" required></textarea>
+                        <i class="fas fa-comment"></i>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
                 </form>
             </div>
         </div>
@@ -260,13 +498,17 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Harshal Barhate. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#home">Back to Top</a>
+            <div class="footer-content">
+                <p>&copy; 2026 Harshal Barhate. Crafted with <i class="fas fa-heart"></i> and lots of <i class="fas fa-coffee"></i></p>
+                <div class="footer-links">
+                    <a href="#home">Back to Top <i class="fas fa-arrow-up"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script-new.js"></script>
 </body>
 </html>
