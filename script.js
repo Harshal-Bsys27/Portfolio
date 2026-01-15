@@ -351,3 +351,68 @@ if (!document.querySelector('link[href*="aos"]')) {
     aosCSS.href = 'https://unpkg.com/aos@2.3.1/dist/aos.css';
     document.head.appendChild(aosCSS);
 }
+
+// ========================================
+// ABOUT: Read-more toggle and small animations
+// ========================================
+const readMoreBtn = document.querySelector('.about-readmore');
+if (readMoreBtn) {
+    const aboutExtra = document.querySelector('.about-extra');
+    readMoreBtn.addEventListener('click', () => {
+        const open = aboutExtra.classList.toggle('open');
+        aboutExtra.setAttribute('aria-hidden', (!open).toString());
+        readMoreBtn.textContent = open ? 'Show less' : 'Read more';
+    });
+}
+
+// Skill chip hover subtle animation
+document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('mouseenter', () => chip.style.transform = 'translateY(-4px)');
+    chip.addEventListener('mouseleave', () => chip.style.transform = 'translateY(0)');
+});
+
+// ========================================
+// VIDEO MODAL FOR DEMO BUTTONS
+// ========================================
+const videoModal = document.getElementById('video-modal');
+const videoWrapper = document.querySelector('.video-wrapper');
+const modalCloseBtn = document.querySelector('.modal-close');
+
+function openVideoModal(src) {
+    videoWrapper.innerHTML = '';
+    if (src && src !== '#') {
+        const iframe = document.createElement('iframe');
+        iframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+        iframe.allowFullscreen = true;
+        videoWrapper.appendChild(iframe);
+    } else {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'demo-placeholder';
+        placeholder.innerHTML = '<i class="fas fa-info-circle"></i><span>Demo not available yet.</span>';
+        videoWrapper.appendChild(placeholder);
+    }
+    videoModal.classList.add('open');
+    videoModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeVideoModal() {
+    videoModal.classList.remove('open');
+    videoModal.setAttribute('aria-hidden', 'true');
+    videoWrapper.innerHTML = '';
+}
+
+// Delegate clicks on demo buttons
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.demo-btn');
+    if (!btn) return;
+    e.preventDefault();
+    const src = btn.getAttribute('data-video') || btn.getAttribute('href');
+    openVideoModal(src);
+});
+
+// Close handlers
+modalCloseBtn.addEventListener('click', closeVideoModal);
+videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) closeVideoModal();
+});
