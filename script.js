@@ -407,8 +407,17 @@ document.addEventListener('click', (e) => {
     const btn = e.target.closest('.demo-btn');
     if (!btn) return;
     e.preventDefault();
-    const src = btn.getAttribute('data-video') || btn.getAttribute('href');
-    openVideoModal(src);
+    const live = btn.getAttribute('data-live');
+    const video = btn.getAttribute('data-video') || btn.getAttribute('href');
+
+    // If a live demo URL is provided, open it in a new tab.
+    if (live && live !== '#') {
+        window.open(live, '_blank');
+        return;
+    }
+
+    // Otherwise, try to open a video in the modal (if provided), or show placeholder.
+    openVideoModal(video);
 });
 
 // Close handlers
