@@ -22,33 +22,6 @@ window.addEventListener('load', () => {
 });
 
 // ========================================
-// CUSTOM CURSOR
-// ========================================
-const cursor = document.querySelector('.cursor');
-const cursorGlow = document.querySelector('.cursor-glow');
-
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    
-    cursorGlow.style.left = e.clientX + 'px';
-    cursorGlow.style.top = e.clientY + 'px';
-});
-
-// Cursor interactions
-document.querySelectorAll('a, button, .project-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        cursorGlow.style.transform = 'translate(-50%, -50%) scale(1.5)';
-    });
-    
-    el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorGlow.style.transform = 'translate(-50%, -50%) scale(1)';
-    });
-});
-
-// ========================================
 // NAVIGATION
 // ========================================
 const hamburger = document.querySelector('.hamburger');
