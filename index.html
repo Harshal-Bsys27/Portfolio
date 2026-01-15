@@ -135,13 +135,39 @@
             
             <div class="about-grid">
                 <div class="about-content" data-aos="fade-right">
-                    <p class="about-text">
-                        I'm a <strong>Third Year Computer Science Engineering student</strong> specializing in Artificial Intelligence and Machine Learning. My passion lies in creating intelligent systems that solve real-world problems.
-                    </p>
-                    <p class="about-text">
-                        From computer vision models that save lives to full-stack platforms that simplify daily tasks, I love building products that make a difference. Currently exploring opportunities to contribute my skills through internships.
-                    </p>
-                    
+                    <div class="about-card no-photo">
+                        <div class="about-body">
+                            <p class="about-text">
+                                I'm a <strong>Third Year Computer Science Engineering student</strong> specializing in Artificial Intelligence & Machine Learning. I build practical AI solutions and full-stack applications to solve real problems.
+                            </p>
+                            <p class="about-text about-short">
+                                I enjoy working on computer vision, NLP, and backend systems — from prototyping models to deploying web apps. Open to internships and collaborative projects.
+                            </p>
+
+                            <div class="about-extra" aria-hidden="true">
+                                <p>
+                                    I have experience training detection models, building REST APIs with Flask, and integrating databases for production-like workflows. I'm keen on improving model accuracy, building intuitive dashboards, and shipping reliable features.
+                                </p>
+                            </div>
+
+                            <button class="btn btn-secondary about-readmore">Read more</button>
+
+                            <div class="skill-chips">
+                                <span class="chip">Python</span>
+                                <span class="chip">YOLO</span>
+                                <span class="chip">OpenCV</span>
+                                <span class="chip">Flask</span>
+                                <span class="chip">React</span>
+                                <span class="chip">SQL</span>
+                            </div>
+
+                            <div class="about-ctas">
+                                <a href="#" class="btn btn-primary">Download Resume</a>
+                                <a href="#contact" class="btn btn-outline">Message Me</a>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="about-highlights">
                         <div class="highlight-item">
                             <div class="highlight-icon">
@@ -159,6 +185,15 @@
                             <div class="highlight-info">
                                 <h4>Location</h4>
                                 <p>Mumbai, India</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div class="highlight-info">
+                                <h4>Achievements</h4>
+                                <p>Hackathons & project showcases focused on CV and ML</p>
                             </div>
                         </div>
                     </div>
@@ -199,70 +234,262 @@
                 <h2 class="section-title">Technical Skills</h2>
             </div>
             
-            <div class="skills-grid">
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
-                    <div class="skill-icon python">
-                        <i class="fab fa-python"></i>
+            <!-- Programming Languages -->
+            <div class="skill-category" data-aos="fade-up">
+                <h3 class="category-title">
+                    <i class="fas fa-code"></i> Programming Languages
+                </h3>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="skill-icon python">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h4>Python</h4>
+                        <p>Primary language for AI/ML & Backend</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 90%"></div>
+                        </div>
                     </div>
-                    <h3>Python</h3>
-                    <p>Flask, FastAPI, Data Processing</p>
-                    <div class="skill-progress">
-                        <div class="progress-bar" style="width: 90%"></div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="150">
+                        <div class="skill-icon js">
+                            <i class="fab fa-js-square"></i>
+                        </div>
+                        <h4>JavaScript</h4>
+                        <p>ES6+, Async/Await, DOM Manipulation</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="200">
-                    <div class="skill-icon ai">
-                        <i class="fas fa-brain"></i>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="skill-icon c">
+                            <i class="fas fa-copyright"></i>
+                        </div>
+                        <h4>C Programming</h4>
+                        <p>Data Structures, Algorithms</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 75%"></div>
+                        </div>
                     </div>
-                    <h3>AI/ML</h3>
-                    <p>Computer Vision, YOLO, NLP</p>
-                    <div class="skill-progress">
-                        <div class="progress-bar" style="width: 85%"></div>
-                    </div>
-                </div>
-                
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="300">
-                    <div class="skill-icon react">
-                        <i class="fab fa-react"></i>
-                    </div>
-                    <h3>React</h3>
-                    <p>Material UI, State Management</p>
-                    <div class="skill-progress">
-                        <div class="progress-bar" style="width: 88%"></div>
-                    </div>
-                </div>
-                
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="400">
-                    <div class="skill-icon db">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>Databases</h3>
-                    <p>MongoDB, SQLite, SQLAlchemy</p>
-                    <div class="skill-progress">
-                        <div class="progress-bar" style="width: 82%"></div>
-                    </div>
-                </div>
-                
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="500">
-                    <div class="skill-icon flutter">
-                        <i class="fab fa-flutter"></i>
-                    </div>
-                    <h3>Flutter</h3>
-                    <p>Cross-platform Mobile Apps</p>
-                    <div class="skill-progress">
-                        <div class="progress-bar" style="width: 75%"></div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="250">
+                        <div class="skill-icon sql">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>SQL</h4>
+                        <p>Query Optimization, Database Design</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 80%"></div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="600">
-                    <div class="skill-icon git">
-                        <i class="fab fa-git-alt"></i>
+            </div>
+
+            <!-- AI/ML & Computer Vision -->
+            <div class="skill-category" data-aos="fade-up">
+                <h3 class="category-title">
+                    <i class="fas fa-brain"></i> AI/ML & Computer Vision
+                </h3>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="skill-icon ai">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>YOLO</h4>
+                        <p>Object Detection, Real-time Tracking</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
                     </div>
-                    <h3>Git & GitHub</h3>
-                    <p>Version Control, Collaboration</p>
-                    <div class="skill-progress">
-                        <div class="progress-bar" style="width: 90%"></div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="150">
+                        <div class="skill-icon nlp">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <h4>NLP</h4>
+                        <p>Text Processing, Transformers</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="skill-icon cv">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4>Computer Vision</h4>
+                        <p>Image Processing, Video Analysis</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="250">
+                        <div class="skill-icon ml">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Machine Learning</h4>
+                        <p>Model Training, Scikit-learn</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 82%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frontend Development -->
+            <div class="skill-category" data-aos="fade-up">
+                <h3 class="category-title">
+                    <i class="fas fa-palette"></i> Frontend Development
+                </h3>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="skill-icon react">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <h4>React</h4>
+                        <p>Hooks, Context API, Material UI</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="150">
+                        <div class="skill-icon html">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <h4>HTML5</h4>
+                        <p>Semantic HTML, Accessibility</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="skill-icon css">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <h4>CSS3</h4>
+                        <p>Flexbox, Grid, Animations, Tailwind</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="250">
+                        <div class="skill-icon bootstrap">
+                            <i class="fab fa-bootstrap"></i>
+                        </div>
+                        <h4>Bootstrap</h4>
+                        <p>Responsive Design, Components</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backend Development -->
+            <div class="skill-category" data-aos="fade-up">
+                <h3 class="category-title">
+                    <i class="fas fa-server"></i> Backend Development
+                </h3>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="skill-icon flask">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h4>Flask</h4>
+                        <p>REST APIs, Authentication, Blueprints</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="150">
+                        <div class="skill-icon api">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h4>REST APIs</h4>
+                        <p>RESTful Design, API Integration</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="skill-icon jwt">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h4>JWT & Auth</h4>
+                        <p>Authentication, Authorization</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="250">
+                        <div class="skill-icon postman">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h4>API Testing</h4>
+                        <p>Postman, Testing & Documentation</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 82%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Database & Tools -->
+            <div class="skill-category" data-aos="fade-up">
+                <h3 class="category-title">
+                    <i class="fas fa-database"></i> Database & Tools
+                </h3>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="skill-icon mongodb">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>MongoDB</h4>
+                        <p>NoSQL, Aggregation, Indexing</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="150">
+                        <div class="skill-icon sqlite">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>SQLite</h4>
+                        <p>Embedded Database, SQLAlchemy</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 82%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="skill-icon workbench">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>MySQL Workbench</h4>
+                        <p>Database Design, Management</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card" data-aos="zoom-in" data-aos-delay="250">
+                        <div class="skill-icon git">
+                            <i class="fab fa-git-alt"></i>
+                        </div>
+                        <h4>Git & GitHub</h4>
+                        <p>Version Control, Collaboration</p>
+                        <div class="skill-progress">
+                            <div class="progress-bar" style="width: 90%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -295,21 +522,23 @@
                             CoastVision
                         </h3>
                         <p class="project-desc">
-                            AI-based beach surveillance system for real-time swimmer and drowning detection with zone-wise monitoring dashboard and Flutter lifeguard mobile app.
+                            AI-based beach surveillance system for real-time swimmer and drowning detection with zone-wise monitoring dashboard and alert system for lifeguards.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">YOLO</span>
                             <span class="tech-tag">Computer Vision</span>
-                            <span class="tech-tag">Flutter</span>
                             <span class="tech-tag">Python</span>
+                            <span class="tech-tag">OpenCV</span>
                         </div>
                         
                         <!-- Demo Section -->
                         <div class="project-demo">
-                            <div class="demo-placeholder">
-                                <i class="fas fa-video"></i>
-                                <span>Demo video coming soon</span>
-                            </div>
+                            <a href="#" class="demo-btn" data-video="#" target="_blank">
+                                <i class="fas fa-play-circle"></i> View Live Demo
+                            </a>
+                            <a href="#" class="demo-btn video" data-video="https://www.youtube.com/embed/ysz5S6PUM-U" target="_blank" style="margin-left:10px;">
+                                <i class="fas fa-video"></i> Watch Demo Video
+                            </a>
                         </div>
                         
                         <div class="project-stats">
@@ -345,7 +574,7 @@
                         
                         <!-- Demo Section -->
                         <div class="project-demo">
-                            <a href="#" class="demo-btn" target="_blank">
+                            <a href="#" class="demo-btn" data-video="#" target="_blank">
                                 <i class="fas fa-play-circle"></i> View Live Demo
                             </a>
                         </div>
@@ -410,6 +639,15 @@
                             <span class="tech-tag">MUI</span>
                             <span class="tech-tag">JWT</span>
                         </div>
+                        <!-- Demo Section -->
+                        <div class="project-demo">
+                            <a href="#" class="demo-btn" target="_blank">
+                                <i class="fas fa-play-circle"></i> View Live Demo
+                            </a>
+                            <a href="#" class="demo-btn video" target="_blank" style="margin-left:10px;">
+                                <i class="fas fa-video"></i> Watch Demo Video
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -435,6 +673,12 @@
                             <span class="tech-tag">Flask</span>
                             <span class="tech-tag">SQLite</span>
                             <span class="tech-tag">Bootstrap</span>
+                        </div>
+                        <!-- Demo Section -->
+                        <div class="project-demo">
+                            <a href="#" class="demo-btn" target="_blank">
+                                <i class="fas fa-play-circle"></i> View Live Demo
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -528,6 +772,14 @@
 
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Video modal (opened by demo buttons) -->
+    <div id="video-modal" class="video-modal" aria-hidden="true">
+        <div class="video-modal-inner">
+            <button class="modal-close" aria-label="Close video">&times;</button>
+            <div class="video-wrapper"></div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
