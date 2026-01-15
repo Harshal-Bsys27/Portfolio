@@ -619,6 +619,35 @@ section {
     gap: 1.5rem;
 }
 
+/* About card & profile */
+
+.about-card {
+    display: block;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding: 1rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 8px 30px rgba(2,6,23,0.4);
+}
+
+.about-body { padding: 0; }
+
+.about-extra { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, opacity 0.4s ease; opacity: 0; }
+.about-extra.open { max-height: 200px; opacity: 1; }
+
+.about-readmore { margin-top: 0.8rem; }
+
+.skill-chips { display:flex; gap:0.5rem; flex-wrap:wrap; margin-top: 1rem; }
+.chip { background: rgba(255,255,255,0.03); padding:6px 10px; border-radius:999px; color:var(--text-secondary); font-size:0.9rem; border:1px solid rgba(255,255,255,0.03); }
+.chip:hover { background: rgba(99,102,241,0.08); color:var(--text-primary); border-color: rgba(99,102,241,0.15); transform: translateY(-3px); }
+
+.about-ctas { margin-top:1rem; display:flex; gap:0.75rem; }
+.btn-outline { border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--text-primary); padding:10px 18px; border-radius:10px; text-decoration:none; }
+
+@media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+}
+
 .stat-card {
     padding: 2rem;
     background: rgba(255, 255, 255, 0.02);
@@ -664,57 +693,98 @@ section {
 /* ========================================
    SKILLS SECTION
    ======================================== */
+.skill-category {
+    margin-bottom: 4rem;
+}
+
+.skill-category:last-child {
+    margin-bottom: 0;
+}
+
+.category-title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(99, 102, 241, 0.2);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.category-title i {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
 }
 
 .skill-card {
-    padding: 2rem;
+    padding: 1.75rem;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    transition: all 0.3s;
+    border-radius: 16px;
+    transition: all 0.3s ease;
 }
 
 .skill-card:hover {
     background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-10px);
+    transform: translateY(-8px);
     border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
 }
 
 .skill-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 2.25rem;
+    margin-bottom: 1.25rem;
 }
 
 .skill-icon.python { background: linear-gradient(135deg, #3776ab 0%, #ffd343 100%); }
+.skill-icon.js { background: linear-gradient(135deg, #f7df1e 0%, #e8b801 100%); }
+.skill-icon.c { background: linear-gradient(135deg, #00599c 0%, #004482 100%); }
+.skill-icon.sql { background: linear-gradient(135deg, #f29111 0%, #dd8a0b 100%); }
 .skill-icon.ai { background: var(--gradient-primary); }
+.skill-icon.nlp { background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); }
+.skill-icon.cv { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); }
+.skill-icon.ml { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
 .skill-icon.react { background: linear-gradient(135deg, #61dafb 0%, #282c34 100%); }
-.skill-icon.db { background: linear-gradient(135deg, #4db33d 0%, #3b8686 100%); }
-.skill-icon.flutter { background: linear-gradient(135deg, #02569b 0%, #0468d7 100%); }
+.skill-icon.html { background: linear-gradient(135deg, #e34f26 0%, #f16529 100%); }
+.skill-icon.css { background: linear-gradient(135deg, #1572b6 0%, #33a9dc 100%); }
+.skill-icon.bootstrap { background: linear-gradient(135deg, #7952b3 0%, #563d7c 100%); }
+.skill-icon.flask { background: linear-gradient(135deg, #000000 0%, #4d4d4d 100%); }
+.skill-icon.api { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); }
+.skill-icon.jwt { background: linear-gradient(135deg, #d63aff 0%, #b026d6 100%); }
+.skill-icon.postman { background: linear-gradient(135deg, #ff6c37 0%, #ff4500 100%); }
+.skill-icon.mongodb { background: linear-gradient(135deg, #4db33d 0%, #3b8686 100%); }
+.skill-icon.sqlite { background: linear-gradient(135deg, #003b57 0%, #005f8a 100%); }
+.skill-icon.workbench { background: linear-gradient(135deg, #00758f 0%, #f29111 100%); }
 .skill-icon.git { background: linear-gradient(135deg, #f14e32 0%, #e84d3d 100%); }
 
-.skill-card h3 {
-    font-size: 1.5rem;
+.skill-card h4 {
+    font-size: 1.35rem;
     margin-bottom: 0.5rem;
+    color: var(--text-primary);
 }
 
 .skill-card p {
     color: var(--text-secondary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
 }
 
 .skill-progress {
     width: 100%;
-    height: 8px;
+    height: 7px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     overflow: hidden;
@@ -724,7 +794,7 @@ section {
     height: 100%;
     background: var(--gradient-primary);
     border-radius: 10px;
-    transition: width 1s ease;
+    transition: width 1.5s ease;
 }
 
 /* ========================================
@@ -736,8 +806,18 @@ section {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2.5rem;
+}
+
+/* Align projects to match About section column width (left-aligned) */
+.projects .projects-grid {
+    max-width: 70%;
+    margin-right: auto;
+}
+
+@media (max-width: 1100px) {
+    .projects .projects-grid { max-width: 100%; }
 }
 
 .project-card {
@@ -747,6 +827,7 @@ section {
     overflow: hidden;
     transition: all 0.3s;
     position: relative;
+    min-height: 520px;
 }
 
 .project-card:hover {
@@ -756,7 +837,13 @@ section {
 }
 
 .project-card.featured {
-    grid-column: span 2;
+    grid-column: span 1;
+    min-height: 420px;
+}
+
+@media (min-width: 1400px) {
+    /* allow featured card to span two columns only on very wide screens */
+    .project-card.featured { grid-column: span 2; }
 }
 
 .project-badge {
@@ -772,10 +859,46 @@ section {
     z-index: 2;
 }
 
-.project-image {
+ .project-image {
+     position: relative;
+     height: 280px;
+     overflow: hidden;
+ }
+
+/* slightly smaller image for the featured card to reduce visual dominance */
+.project-card.featured .project-image { height: 240px; }
+
+/* Video modal styles */
+.video-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(2,6,23,0.75);
+    z-index: 20000;
+    padding: 2rem;
+}
+.video-modal.open { display: flex; }
+.video-modal-inner {
+    width: 100%;
+    max-width: 1000px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 12px;
+    padding: 0.75rem;
     position: relative;
-    height: 250px;
-    overflow: hidden;
+}
+.video-wrapper iframe { width: 100%; height: 520px; border: 0; border-radius: 8px; display: block; }
+.modal-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    color: var(--text-primary);
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
 }
 
 .project-image img {
@@ -826,6 +949,8 @@ section {
 
 .project-content {
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-title {
@@ -844,6 +969,27 @@ section {
     color: var(--text-secondary);
     line-height: 1.7;
     margin-bottom: 1.5rem;
+}
+
+.project-demo { display:flex; gap:0.75rem; align-items:center; }
+
+/* Center layout for featured project content */
+.project-card.featured .project-content {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.project-card.featured .project-title {
+    justify-content: center;
+}
+
+.project-card.featured .project-tech {
+    justify-content: center;
+}
+
+.project-card.featured .project-stats {
+    justify-content: center;
 }
 
 .project-tech {
