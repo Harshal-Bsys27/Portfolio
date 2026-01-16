@@ -404,12 +404,22 @@ body {
     color: var(--text-primary);
     font-size: 1.2rem;
     transition: all 0.3s;
+    text-decoration: none;
 }
 
 .social-link:hover {
     background: var(--gradient-primary);
     border-color: transparent;
     transform: translateY(-5px);
+}
+
+/* Ensure no underline or unexpected decoration on social anchors */
+.social-link, .social-link i {
+    text-decoration: none !important;
+}
+.social-link:focus, .social-link:hover {
+    text-decoration: none !important;
+    outline: none;
 }
 
 /* Hero Visual */
