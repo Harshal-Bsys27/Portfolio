@@ -1262,6 +1262,28 @@ section {
     font-size: 1.1rem;
 }
 
+/* Project outcomes list */
+.project-outcomes {
+    margin: 1rem 0 0 0;
+    padding-left: 1.1rem;
+    color: var(--text-secondary);
+}
+.project-outcomes li { margin-bottom: 0.5rem; }
+
+/* Project modal styles */
+.project-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(2,6,23,0.8); z-index: 30000; padding: 2rem; }
+.project-modal.open { display:flex; }
+.project-modal-inner { width:100%; max-width:900px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:1rem; position:relative; }
+.project-modal .project-close { position:absolute; top:10px; right:10px; background:transparent; color:var(--text-primary); border:none; font-size:2rem; cursor:pointer; }
+.project-modal-body { padding:1rem 1.25rem; }
+.modal-title { font-size:1.6rem; margin-bottom:0.5rem; }
+.modal-desc { color:var(--text-secondary); margin-bottom:1rem; }
+.modal-screenshots { display:flex; gap:0.75rem; margin-bottom:1rem; }
+.modal-screenshots img { width: 48%; border-radius:8px; object-fit:cover; }
+.modal-tech { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+.modal-links { display:flex; gap:0.75rem; }
+.modal-links a { text-decoration:none; }
+
 /* ========================================
    RESPONSIVE DESIGN
    ======================================== */

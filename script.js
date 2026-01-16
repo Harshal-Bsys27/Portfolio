@@ -425,3 +425,74 @@ modalCloseBtn.addEventListener('click', closeVideoModal);
 videoModal.addEventListener('click', (e) => {
     if (e.target === videoModal) closeVideoModal();
 });
+
+// ========================================
+// Project Details Modal
+// ========================================
+const projectModal = document.getElementById('project-modal');
+const projectModalInner = document.querySelector('.project-modal-inner');
+const projectModalClose = document.querySelector('.project-close');
+
+function openProjectModal(data) {
+    projectModal.querySelector('.modal-title').textContent = data.title || 'Project';
+    projectModal.querySelector('.modal-desc').textContent = data.desc || '';
+
+    const techList = projectModal.querySelector('.modal-tech');
+    techList.innerHTML = '';
+    (data.tech || []).forEach(t => {
+        const el = document.createElement('span'); el.className = 'tech-tag'; el.textContent = t; techList.appendChild(el);
+    });
+
+    const shots = projectModal.querySelector('.modal-screenshots');
+    shots.innerHTML = '';
+    (data.screenshots || []).forEach(src => {
+        const img = document.createElement('img'); img.src = src; shots.appendChild(img);
+    });
+
+    const links = projectModal.querySelector('.modal-links');
+    links.innerHTML = '';
+    if (data.repo) {
+        const a = document.createElement('a'); a.href = data.repo; a.target = '_blank'; a.className = 'btn-outline'; a.textContent = 'Repository'; links.appendChild(a);
+    }
+    if (data.live) {
+        const a = document.createElement('a'); a.href = data.live; a.target = '_blank'; a.className = 'demo-btn'; a.textContent = 'Live Demo'; links.appendChild(a);
+    }
+
+    projectModal.classList.add('open'); projectModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeProjectModal() {
+    projectModal.classList.remove('open'); projectModal.setAttribute('aria-hidden', 'true');
+}
+
+projectModalClose.addEventListener('click', closeProjectModal);
+projectModal.addEventListener('click', (e) => { if (e.target === projectModal) closeProjectModal(); });
+
+// Wire details buttons to open with simple data map
+const projectData = {
+    'CoastVision': {
+        title: 'CoastVision',
+        desc: 'AI-based beach surveillance system for real-time swimmer and drowning detection with alerts for lifeguards.',
+        tech: ['YOLO','OpenCV','Python'],
+        screenshots: ['https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=500&fit=crop&q=80'],
+        repo: 'https://github.com/Harshal-Bsys27/CoastVision',
+        live: '#'
+    },
+    'LetsTravel': {
+        title: 'LetsTravel', desc: 'Full-stack travel booking platform with personalized itinerary generation and PDF ticketing.', tech: ['Flask','MongoDB'], screenshots:['https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=500&fit=crop&q=80'], repo:'https://github.com/Harshal-Bsys27/LetsTravel', live:'https://letstravel-w00j.onrender.com'
+    },
+    'HireLens': { title:'HireLens', desc:'Resume analyzer with NLP-based skill extraction and PDF reports.', tech:['React','Flask','NLP'], screenshots:['https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=500&fit=crop&q=80'], repo:'https://github.com/Harshal-Bsys27/AI-Resume-Analyzer-Hirelens', live:'#' },
+    'AI Study Planner': { title:'AI Study Planner', desc:'Personalized study plans, progress tracking and calendar integration.', tech:['React','Flask','MUI'], screenshots:['https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=500&fit=crop&q=80'], repo:'https://github.com/Harshal-Bsys27/ai-study-planner', live:'https://ai-study-planner-frontend.onrender.com' },
+    'Student Management System': { title:'Student Management', desc:'Manage student records with role-based access and CSV import/export.', tech:['Flask','SQLite'], screenshots:['https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=500&fit=crop&q=80'], repo:'https://github.com/Harshal-Bsys27/student-management-system', live:'https://student-management-system-4ptl.onrender.com/' }
+}
+
+document.querySelectorAll('.details-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const card = btn.closest('.project-card');
+        const title = (card.querySelector('.project-title')||{}).innerText || '';
+        const name = title.trim();
+        const data = projectData[name] || { title: name, desc: '', tech: [], screenshots: [], repo: '#', live: '#' };
+        openProjectModal(data);
+    });
+});
