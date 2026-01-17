@@ -816,14 +816,21 @@ section {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+    width: 100%;
 }
 
-/* Align projects to match About section column width (left-aligned) */
+/* Desktop: 2 columns for tidy 2x2 arrangement */
+@media (min-width: 900px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+}
+
+/* Ensure grid uses full container width and centers */
 .projects .projects-grid {
-    max-width: 70%;
-    margin-right: auto;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 @media (max-width: 1100px) {
@@ -833,11 +840,13 @@ section {
 .project-card {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 25px;
+    border-radius: 20px;
     overflow: hidden;
     transition: all 0.3s;
     position: relative;
-    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .project-card:hover {
@@ -846,15 +855,7 @@ section {
     box-shadow: var(--shadow-lg);
 }
 
-.project-card.featured {
-    grid-column: span 1;
-    min-height: 420px;
-}
-
-@media (min-width: 1400px) {
-    /* allow featured card to span two columns only on very wide screens */
-    .project-card.featured { grid-column: span 2; }
-}
+.project-card.featured { grid-column: span 1; }
 
 .project-badge {
     position: absolute;
@@ -869,11 +870,11 @@ section {
     z-index: 2;
 }
 
- .project-image {
-     position: relative;
-     height: 280px;
-     overflow: hidden;
- }
+.project-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
 
 /* slightly smaller image for the featured card to reduce visual dominance */
 .project-card.featured .project-image { height: 240px; }
@@ -958,10 +959,14 @@ section {
 }
 
 .project-content {
-    padding: 2rem;
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
 }
+
+/* Hide on-card outcomes to keep cards compact; details available in modal */
+.project-outcomes { display: none; }
 
 .project-title {
     font-size: 1.5rem;
@@ -981,17 +986,17 @@ section {
     margin-bottom: 1.5rem;
 }
 
-.project-demo { display:flex; gap:0.75rem; align-items:center; }
+.project-demo { display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; }
 
-/* Vertical layout for specific project demo buttons */
-.project-demo.vertical {
-    flex-direction: column;
-    align-items: center;
-}
-
-.project-demo.vertical .demo-btn {
-    width: 100%;
-    max-width: 320px;
+/* For vertical demo groups: keep buttons compact, centered and readable */
+.project-demo.vertical { flex-direction: column; align-items: center; }
+.project-demo.vertical .demo-btn,
+.project-demo.vertical .btn-outline {
+    display: block;
+    width: auto;
+    max-width: 260px;
+    margin: 0.35rem auto;
+    text-align: center;
 }
 
 /* Center layout for featured project content */
