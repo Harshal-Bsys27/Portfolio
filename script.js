@@ -437,6 +437,18 @@ function openProjectModal(data) {
     projectModal.querySelector('.modal-title').textContent = data.title || 'Project';
     projectModal.querySelector('.modal-desc').textContent = data.desc || '';
 
+    // Render outcomes: prefer HTML captured from the card (preserves user's original pasted points),
+    // otherwise fall back to `data.outcomes` array if provided.
+    const outcomesContainer = projectModal.querySelector('.modal-outcomes');
+    outcomesContainer.innerHTML = '';
+    if (data.outcomesHTML && data.outcomesHTML.trim().length) {
+        outcomesContainer.innerHTML = data.outcomesHTML;
+    } else if (Array.isArray(data.outcomes) && data.outcomes.length) {
+        data.outcomes.forEach(item => {
+            const li = document.createElement('li'); li.textContent = item; outcomesContainer.appendChild(li);
+        });
+    }
+
     const techList = projectModal.querySelector('.modal-tech');
     techList.innerHTML = '';
     (data.tech || []).forEach(t => {
@@ -493,6 +505,9 @@ document.querySelectorAll('.details-btn').forEach(btn => {
         const title = (card.querySelector('.project-title')||{}).innerText || '';
         const name = title.trim();
         const data = projectData[name] || { title: name, desc: '', tech: [], screenshots: [], repo: '#', live: '#' };
+        // If the card contains a hidden outcomes list (user-pasted points), capture its HTML and pass to modal so exact points appear.
+        const cardOutcomes = card.querySelector('.project-outcomes');
+        if (cardOutcomes) data.outcomesHTML = cardOutcomes.innerHTML;
         openProjectModal(data);
     });
 });
