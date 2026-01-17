@@ -190,41 +190,45 @@ window.addEventListener('scroll', () => {
 });
 
 // ========================================
-// FORM SUBMISSION
+// FORM SUBMISSION - open user's email client via mailto:
 // ========================================
 const contactForm = document.querySelector('.contact-form');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-    
-    // Simulate form submission
+
+    const name = contactForm.querySelector('input[name="name"]').value.trim();
+    const email = contactForm.querySelector('input[name="email"]').value.trim();
+    const subject = contactForm.querySelector('input[name="subject"]').value.trim();
+    const message = contactForm.querySelector('textarea[name="message"]').value.trim();
+
+    if (!name || !email || !subject || !message) {
+        alert('Please fill in all fields before sending.');
+        return;
+    }
+
     const submitBtn = contactForm.querySelector('.btn-primary');
     const originalText = submitBtn.innerHTML;
-    
-    submitBtn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
+
+    // Build mailto link
+    const to = 'harshalbarhate2028@gmail.com';
+    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+    const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Provide immediate feedback then open mail client
+    submitBtn.innerHTML = '<span>Opening mail client...</span> <i class="fas fa-paper-plane"></i>';
     submitBtn.disabled = true;
-    
+
+    // Open mail client (will open default email app)
+    window.location.href = mailto;
+
+    // Restore button after short delay (user can close or cancel their mail client)
     setTimeout(() => {
-        submitBtn.innerHTML = '<span>Message Sent!</span> <i class="fas fa-check"></i>';
-        submitBtn.style.background = 'linear-gradient(135deg, #4ade80 0%, #22c55e 100%)';
-        
-        // Reset form
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        // Optionally clear form
         contactForm.reset();
-        
-        // Reset button after 3 seconds
-        setTimeout(() => {
-            submitBtn.innerHTML = originalText;
-            submitBtn.style.background = '';
-            submitBtn.disabled = false;
-        }, 3000);
-        
-        // Show success message (you can customize this)
-        console.log('Form submitted:', data);
-        alert('Thank you! Your message has been sent successfully. I will get back to you soon!');
-    }, 2000);
+    }, 1500);
 });
 
 // ========================================
@@ -243,25 +247,31 @@ window.addEventListener('scroll', () => {
 // ========================================
 // PROJECT CARD TILT EFFECT
 // ========================================
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+// Disable tilt on touch devices to prevent awkward interactions
+if (!('ontouchstart' in window)) {
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        });
     });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+} else {
+    // For touch devices keep a small elevation on tap for affordance
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('touchstart', () => card.style.transform = 'translateY(-6px)');
+        card.addEventListener('touchend', () => card.style.transform = 'translateY(0)');
     });
-});
+}
 
 // ========================================
 // FLOATING TECH ICONS ANIMATION
