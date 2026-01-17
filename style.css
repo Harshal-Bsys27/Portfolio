@@ -872,12 +872,12 @@ section {
 
 .project-image {
     position: relative;
-    height: 220px;
+    height: 200px;
     overflow: hidden;
 }
 
-/* slightly smaller image for the featured card to reduce visual dominance */
-.project-card.featured .project-image { height: 240px; }
+/* slightly larger image for the featured card */
+.project-card.featured .project-image { height: 220px; }
 
 /* Video modal styles */
 .video-modal {
@@ -959,7 +959,7 @@ section {
 }
 
 .project-content {
-    padding: 1.25rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
@@ -1205,9 +1205,13 @@ section {
    PROJECT DEMO SECTION
    ======================================== */
 .project-demo {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .demo-placeholder {
@@ -1237,16 +1241,16 @@ section {
 .demo-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.875rem 1.75rem;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
     background: linear-gradient(135deg, var(--primary), var(--accent));
     color: white;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 8px;
     font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    font-size: 0.9rem;
+    transition: all 0.18s ease;
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.18);
 }
 
 .demo-btn:hover {
@@ -1263,9 +1267,7 @@ section {
     box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
 }
 
-.demo-btn i {
-    font-size: 1.1rem;
-}
+.demo-btn i { font-size: 1rem; }
 
 /* Project outcomes list */
 .project-outcomes {
