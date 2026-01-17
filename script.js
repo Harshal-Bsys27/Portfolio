@@ -437,38 +437,52 @@ function openProjectModal(data) {
     projectModal.querySelector('.modal-title').textContent = data.title || 'Project';
     projectModal.querySelector('.modal-desc').textContent = data.desc || '';
 
-    // Render outcomes: prefer HTML captured from the card (preserves user's original pasted points),
-    // otherwise fall back to `data.outcomes` array if provided.
-    const outcomesContainer = projectModal.querySelector('.modal-outcomes');
-    outcomesContainer.innerHTML = '';
-    if (data.outcomesHTML && data.outcomesHTML.trim().length) {
-        outcomesContainer.innerHTML = data.outcomesHTML;
-    } else if (Array.isArray(data.outcomes) && data.outcomes.length) {
-        data.outcomes.forEach(item => {
-            const li = document.createElement('li'); li.textContent = item; outcomesContainer.appendChild(li);
-        });
+    // Show either a case-study (Problem / Approach / Impact) or a simple highlights list.
+    const caseBlock = projectModal.querySelector('.modal-case');
+    const outcomesBlock = projectModal.querySelector('.modal-outcomes-block');
+    const problemEl = projectModal.querySelector('.modal-problem');
+    const approachEl = projectModal.querySelector('.modal-approach');
+    const impactEl = projectModal.querySelector('.modal-impact');
+    const outcomesEl = projectModal.querySelector('.modal-outcomes');
+
+    // Reset blocks
+    caseBlock.style.display = 'none';
+    outcomesBlock.style.display = 'none';
+    problemEl.textContent = '';
+    approachEl.innerHTML = '';
+    impactEl.innerHTML = '';
+    outcomesEl.innerHTML = '';
+
+    if (data.caseStudy) {
+        caseBlock.style.display = '';
+        problemEl.textContent = data.problem || '';
+        (data.approach || []).forEach(item => { const li = document.createElement('li'); li.textContent = item; approachEl.appendChild(li); });
+        (data.impact || []).forEach(item => { const li = document.createElement('li'); li.textContent = item; impactEl.appendChild(li); });
+    } else {
+        outcomesBlock.style.display = '';
+        // Prefer exact HTML pasted on the card
+        if (data.outcomesHTML && data.outcomesHTML.trim().length) {
+            outcomesEl.innerHTML = data.outcomesHTML;
+        } else if (Array.isArray(data.outcomes) && data.outcomes.length) {
+            data.outcomes.forEach(item => { const li = document.createElement('li'); li.textContent = item; outcomesEl.appendChild(li); });
+        }
     }
 
+    // Tech tags
     const techList = projectModal.querySelector('.modal-tech');
     techList.innerHTML = '';
-    (data.tech || []).forEach(t => {
-        const el = document.createElement('span'); el.className = 'tech-tag'; el.textContent = t; techList.appendChild(el);
-    });
+    (data.tech || []).forEach(t => { const el = document.createElement('span'); el.className = 'tech-tag'; el.textContent = t; techList.appendChild(el); });
 
+    // Screenshots
     const shots = projectModal.querySelector('.modal-screenshots');
     shots.innerHTML = '';
-    (data.screenshots || []).forEach(src => {
-        const img = document.createElement('img'); img.src = src; shots.appendChild(img);
-    });
+    (data.screenshots || []).forEach(src => { const img = document.createElement('img'); img.src = src; shots.appendChild(img); });
 
+    // Links
     const links = projectModal.querySelector('.modal-links');
     links.innerHTML = '';
-    if (data.repo) {
-        const a = document.createElement('a'); a.href = data.repo; a.target = '_blank'; a.className = 'btn-outline'; a.textContent = 'Repository'; links.appendChild(a);
-    }
-    if (data.live) {
-        const a = document.createElement('a'); a.href = data.live; a.target = '_blank'; a.className = 'demo-btn'; a.textContent = 'Live Demo'; links.appendChild(a);
-    }
+    if (data.repo) { const a = document.createElement('a'); a.href = data.repo; a.target = '_blank'; a.className = 'btn-outline'; a.textContent = 'Repository'; links.appendChild(a); }
+    if (data.live) { const a = document.createElement('a'); a.href = data.live; a.target = '_blank'; a.className = 'demo-btn'; a.textContent = 'Live Demo'; links.appendChild(a); }
 
     projectModal.classList.add('open'); projectModal.setAttribute('aria-hidden', 'false');
 }
@@ -486,16 +500,72 @@ const projectData = {
         title: 'CoastVision',
         desc: 'AI-based beach surveillance system for real-time swimmer and drowning detection with alerts for lifeguards.',
         tech: ['YOLO','OpenCV','Python'],
+        problem: 'Preventing drownings at crowded beaches is hard due to limited lifeguard visibility and delayed alerts.',
+        approach: [
+            'Built a real-time detection pipeline using YOLO for swimmer and hazardous-object detection.',
+            'Implemented zone-based monitoring to focus alerts on high-risk areas and reduce false positives.',
+            'Integrated an edge-optimized model variant and a lightweight Flask dashboard for alerts.'
+        ],
+        impact: [
+            'Reduced manual monitoring overhead by enabling automated alerts to lifeguards.',
+            'Model optimized to run on Raspberry Pi-class devices for on-premise deployment.'
+        ],
         screenshots: ['https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=500&fit=crop&q=80'],
         repo: 'https://github.com/Harshal-Bsys27/CoastVision',
         live: '#'
     },
     'LetsTravel': {
-        title: 'LetsTravel', desc: 'Full-stack travel booking platform with personalized itinerary generation and PDF ticketing.', tech: ['Flask','MongoDB'], screenshots:['https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=500&fit=crop&q=80'], repo:'https://github.com/Harshal-Bsys27/LetsTravel', live:'https://letstravel-w00j.onrender.com'
+        title: 'LetsTravel',
+        desc: 'Full-stack travel booking platform with personalized itinerary generation and PDF ticketing.',
+        outcomes: [
+            'End-to-end booking flow with secure checkout and PDF ticketing.',
+            'Itinerary generation using user preferences and basic recommendation rules.',
+            'Admin dashboard for bookings and property management.'
+        ],
+        tech: ['Flask','MongoDB','ReportLab'],
+        screenshots:['https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=500&fit=crop&q=80'],
+        repo:'https://github.com/Harshal-Bsys27/LetsTravel',
+        live:'https://letstravel-w00j.onrender.com'
     },
-    'HireLens': { title:'HireLens', desc:'Resume analyzer with NLP-based skill extraction and PDF reports.', tech:['React','Flask','NLP'], screenshots:['https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=500&fit=crop&q=80'], repo:'https://github.com/Harshal-Bsys27/AI-Resume-Analyzer-Hirelens', live:'#' },
-    'AI Study Planner': { title:'AI Study Planner', desc:'Personalized study plans, progress tracking and calendar integration.', tech:['React','Flask','MUI'], screenshots:['https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=500&fit=crop&q=80'], repo:'https://github.com/Harshal-Bsys27/ai-study-planner', live:'https://ai-study-planner-frontend.onrender.com' },
-    'Student Management System': { title:'Student Management', desc:'Manage student records with role-based access and CSV import/export.', tech:['Flask','SQLite'], screenshots:['https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=500&fit=crop&q=80'], repo:'https://github.com/Harshal-Bsys27/student-management-system', live:'https://student-management-system-4ptl.onrender.com/' }
+    'HireLens': {
+        title:'HireLens',
+        desc:'Resume analyzer with NLP-based skill extraction and PDF recommendations.',
+        outcomes: [
+            'Automated skill extraction and candidate scoring for quick shortlisting.',
+            'Transforms resumes to ATS-friendly layouts.',
+            'Generates actionable PDF reports with improvement suggestions.'
+        ],
+        tech:['React','Flask','NLP','Tailwind'],
+        screenshots:['https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=500&fit=crop&q=80'],
+        repo:'https://github.com/Harshal-Bsys27/AI-Resume-Analyzer-Hirelens',
+        live:'#'
+    },
+    'AI Study Planner': {
+        title:'AI Study Planner',
+        desc:'Personalized study scheduler with progress tracking and calendar integration.',
+        outcomes: [
+            'Generates tailored study plans based on user goals and time availability.',
+            'Visual progress tracking and interactive charts to measure completion.',
+            'Calendar integration for reminders and study sessions.'
+        ],
+        tech:['React','Flask','MUI'],
+        screenshots:['https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=500&fit=crop&q=80'],
+        repo:'https://github.com/Harshal-Bsys27/ai-study-planner',
+        live:'https://ai-study-planner-frontend.onrender.com'
+    },
+    'Student Management System': {
+        title:'Student Management',
+        desc:'Full-stack student records app with role-based access and CSV import/export.',
+        outcomes: [
+            'CRUD operations for student records with role-based permissions.',
+            'CSV import/export for bulk data management.',
+            'Clean dashboard UI for admins and teachers.'
+        ],
+        tech:['Flask','SQLite','Bootstrap'],
+        screenshots:['https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=500&fit=crop&q=80'],
+        repo:'https://github.com/Harshal-Bsys27/student-management-system',
+        live:'https://student-management-system-4ptl.onrender.com/'
+    }
 }
 
 document.querySelectorAll('.details-btn').forEach(btn => {
