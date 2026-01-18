@@ -156,16 +156,18 @@ function animateCounters() {
 }
 
 // Trigger counter animation on scroll
-window.addEventListener('scroll', () => {
-    const aboutSection = document.querySelector('#about');
-    if (aboutSection && !counterStarted) {
-        const rect = aboutSection.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-            counterStarted = true;
-            animateCounters();
+if (counters.length > 0) {
+    window.addEventListener('scroll', () => {
+        const aboutSection = document.querySelector('#about');
+        if (aboutSection && !counterStarted) {
+            const rect = aboutSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                counterStarted = true;
+                animateCounters();
+            }
         }
-    }
-});
+    });
+}
 
 // ========================================
 // SKILL PROGRESS ANIMATION
@@ -179,11 +181,8 @@ window.addEventListener('scroll', () => {
         if (rect.top < window.innerHeight && rect.bottom > 0) {
             skillsAnimated = true;
             document.querySelectorAll('.progress-bar').forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0%';
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 100);
+                const progress = bar.getAttribute('data-progress');
+                bar.style.setProperty('--progress-width', progress + '%');
             });
         }
     }
@@ -591,3 +590,232 @@ document.querySelectorAll('.details-btn').forEach(btn => {
         openProjectModal(data);
     });
 });
+
+// ========================================
+// HERO INTERACTIVE EFFECTS
+// ========================================
+
+// Magnetic cursor effect for buttons and interactive elements
+document.addEventListener('DOMContentLoaded', () => {
+    const magneticElements = document.querySelectorAll('.btn, .icon-btn, .highlight-inline, .hero-hb');
+    
+    magneticElements.forEach(element => {
+        element.addEventListener('mousemove', (e) => {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const deltaX = (e.clientX - centerX) / 8;
+            const deltaY = (e.clientY - centerY) / 8;
+            
+            element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            element.style.transform = 'translate(0, 0)';
+        });
+    });
+});
+
+// Enhanced particle interaction
+document.addEventListener('mousemove', (e) => {
+    const particles = document.querySelectorAll('.particle');
+    particles.forEach((particle, index) => {
+        const speed = (index + 1) * 0.5;
+        const x = (e.clientX * speed) / 100;
+        const y = (e.clientY * speed) / 100;
+        particle.style.transform = `translate(${x}px, ${y}px)`;
+    });
+});
+
+// Name animation enhancement - removed for cleaner look
+
+// Hero showcase interaction
+const heroShowcase = document.querySelector('.hero-showcase');
+if (heroShowcase) {
+    heroShowcase.addEventListener('mouseenter', () => {
+        heroShowcase.style.transform = 'scale(1.02) rotate(1deg)';
+    });
+    
+    heroShowcase.addEventListener('mouseleave', () => {
+        heroShowcase.style.transform = 'scale(1) rotate(0deg)';
+    });
+}
+
+// Typing effect enhancement with sound-like visual feedback
+const originalType = window.type;
+window.type = function() {
+    originalType();
+    
+    // Add subtle visual feedback during typing
+    const cursor = document.querySelector('.cursor-blink');
+    if (cursor) {
+        cursor.style.opacity = Math.random() > 0.5 ? '1' : '0.7';
+    }
+};
+
+// Scroll-triggered particle acceleration
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.5;
+    
+    const particles = document.querySelectorAll('.particle');
+    particles.forEach((particle, index) => {
+        const speed = (index + 1) * 0.1;
+        particle.style.transform = `translateY(${rate * speed}px)`;
+    });
+});
+
+// ========================================
+// ENHANCED BACKGROUND ANIMATIONS
+// ========================================
+
+// Mouse follower effect
+document.addEventListener('DOMContentLoaded', () => {
+    const mouseFollower = document.querySelector('.mouse-follower');
+    const hero = document.querySelector('.hero');
+    
+    if (mouseFollower && hero) {
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            mouseFollower.style.left = `${x - 50}px`;
+            mouseFollower.style.top = `${y - 50}px`;
+            mouseFollower.style.opacity = '0.3';
+        });
+        
+        hero.addEventListener('mouseleave', () => {
+            mouseFollower.style.opacity = '0';
+        });
+    }
+});
+
+// Dynamic particle interaction with mouse
+document.addEventListener('mousemove', (e) => {
+    const particles = document.querySelectorAll('.particle');
+    const mouseX = e.clientX / window.innerWidth;
+    const mouseY = e.clientY / window.innerHeight;
+    
+    particles.forEach((particle, index) => {
+        const speed = (index + 1) * 2;
+        const x = (mouseX - 0.5) * speed;
+        const y = (mouseY - 0.5) * speed;
+        particle.style.transform = `translate(${x}px, ${y}px)`;
+    });
+});
+
+// Neural network pulse effect
+function createNeuralPulse() {
+    const connections = document.querySelectorAll('.connection');
+    connections.forEach((connection, index) => {
+        setTimeout(() => {
+            connection.style.animation = 'none';
+            setTimeout(() => {
+                connection.style.animation = 'connectionFlow 4s ease-in-out infinite';
+            }, 10);
+        }, index * 500);
+    });
+}
+
+// Trigger neural pulse every 10 seconds
+setInterval(createNeuralPulse, 10000);
+
+// Enhanced particle interactions
+function enhanceParticles() {
+    const particles = document.querySelectorAll('.particle-dot');
+    particles.forEach((particle, index) => {
+        setTimeout(() => {
+            particle.style.animationDuration = `${12 + Math.random() * 8}s`;
+            particle.style.animationDelay = `${Math.random() * 15}s`;
+        }, index * 200);
+    });
+}
+
+// Initialize enhanced particles
+setTimeout(enhanceParticles, 2000);
+
+// Data point animations
+function animateDataPoints() {
+    const points = document.querySelectorAll('.data-point');
+    points.forEach((point, index) => {
+        setTimeout(() => {
+            point.style.animation = 'none';
+            setTimeout(() => {
+                point.style.animation = 'dataFloat 12s ease-in-out infinite';
+                point.style.animationDelay = `${index * 2.4}s`;
+            }, 10);
+        }, index * 500);
+    });
+}
+
+// Trigger data point animations
+setTimeout(animateDataPoints, 3000);
+
+// Circuit pattern animation
+function animateCircuit() {
+    const circuit = document.querySelector('.circuit-svg rect');
+    if (circuit) {
+        setInterval(() => {
+            circuit.style.animation = 'none';
+            setTimeout(() => {
+                circuit.style.animation = 'circuitFade 10s ease-in-out infinite';
+            }, 10);
+        }, 10000);
+    }
+}
+
+// Start circuit animation
+setTimeout(animateCircuit, 1000);
+
+// Blob morphing enhancement
+function enhanceBlobs() {
+    const blobs = document.querySelectorAll('.blob');
+    blobs.forEach((blob, index) => {
+        setTimeout(() => {
+            blob.style.animationDuration = `${15 + Math.random() * 10}s`;
+            blob.style.animationDelay = `${Math.random() * 20}s`;
+        }, index * 1000);
+    });
+}
+
+// Initialize enhanced blobs
+setTimeout(enhanceBlobs, 1500);
+
+// Energy wave burst effect
+function triggerWaveBurst() {
+    const waves = document.querySelectorAll('.wave');
+    waves.forEach((wave, index) => {
+        setTimeout(() => {
+            wave.style.animation = 'none';
+            setTimeout(() => {
+                wave.style.animation = 'waveExpand 6s ease-out infinite';
+            }, 10);
+        }, index * 200);
+    });
+}
+
+// Trigger wave burst every 15 seconds
+setInterval(triggerWaveBurst, 15000);
+
+// Dynamic shape morphing
+function morphShapes() {
+    const shapes = document.querySelectorAll('.shape');
+    shapes.forEach((shape, index) => {
+        setTimeout(() => {
+            const shapes = [
+                'polygon(50% 0%, 0% 100%, 100% 100%)',
+                'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
+                'circle(50% at 50% 50%)',
+                'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
+                'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
+                'polygon(20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%, 0% 50%)'
+            ];
+            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+            shape.style.clipPath = randomShape;
+        }, index * 300);
+    });
+}
+
+// Morph shapes every 8 seconds
+setInterval(morphShapes, 8000);
