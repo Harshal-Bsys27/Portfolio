@@ -9,7 +9,6 @@ A modern, responsive portfolio website showcasing my skills, projects, and exper
 - ✨ Smooth animations and transitions
 - 🎯 Interactive navigation
 - 📧 Contact form
-- 🌙 Dark theme
 
 
 **Created by Harshal Barhate** | 2026
