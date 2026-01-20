@@ -2850,8 +2850,120 @@ section {
 }
 
 /* ========================================
-   PROJECTS SECTION
+   CONTACT SECTION
    ======================================== */
+.contact {
+    background: var(--bg-dark);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Contact Section Gradient Orbs */
+.contact-orb-1 {
+    width: 350px;
+    height: 350px;
+    background: var(--gradient-primary);
+    top: -5%;
+    right: -5%;
+    animation-delay: 0s;
+    filter: blur(70px);
+}
+
+.contact-orb-2 {
+    width: 280px;
+    height: 280px;
+    background: var(--gradient-accent);
+    bottom: -5%;
+    left: -5%;
+    animation-delay: 3s;
+    filter: blur(65px);
+}
+
+.contact-orb-3 {
+    width: 220px;
+    height: 220px;
+    background: var(--gradient-success);
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 6s;
+    filter: blur(60px);
+}
+
+/* Contact Section Floating Particles */
+.contact-particle-1 {
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+    background: var(--primary);
+}
+
+.contact-particle-2 {
+    top: 60%;
+    right: 20%;
+    animation-delay: 2s;
+    background: var(--accent);
+}
+
+.contact-particle-3 {
+    bottom: 25%;
+    left: 60%;
+    animation-delay: 4s;
+    background: var(--success);
+}
+
+.contact-particle-4 {
+    top: 40%;
+    right: 10%;
+    animation-delay: 6s;
+    background: var(--primary);
+}
+
+/* Contact Section Neural Network */
+.contact-node-1 {
+    top: 30%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.contact-node-2 {
+    top: 70%;
+    right: 25%;
+    animation-delay: 1s;
+    background: var(--accent);
+}
+
+.contact-node-3 {
+    bottom: 20%;
+    left: 70%;
+    animation-delay: 2s;
+    background: var(--success);
+}
+
+/* Contact Section Energy Waves */
+.wave-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.wave-2 {
+    width: 150px;
+    height: 150px;
+    bottom: 15%;
+    right: 15%;
+    animation-delay: 3s;
+    border-color: rgba(240, 147, 251, 0.2);
+}
 .projects {
     background: var(--bg-dark);
     position: relative;
