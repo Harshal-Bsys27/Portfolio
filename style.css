@@ -3540,6 +3540,21 @@ section {
     box-shadow: 0 6px 20px rgba(240, 147, 251, 0.3);
 }
 
+.demo-btn.disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.demo-btn.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.demo-btn.disabled::before {
+    display: none;
+}
+
 .project-stats span {
     display: flex;
     align-items: center;
