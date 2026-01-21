@@ -4102,3 +4102,135 @@ section {
         opacity: 0;
     }
 }
+
+/* ========================================
+   MOBILE OPTIMIZATIONS & RESPONSIVE DESIGN
+   ======================================== */
+
+/* Performance optimizations for mobile devices */
+@media (max-width: 768px) {
+    /* Reduce background animations on mobile for better performance */
+    .hero-bg, .about-bg, .skills-bg, .projects-bg, .contact-bg {
+        opacity: 0.3 !important;
+    }
+
+    /* Disable complex animations on mobile */
+    .floating-particles, .neural-network, .energy-waves, .geometric-shapes, .particle-system {
+        display: none !important;
+    }
+
+    /* Simplify background effects */
+    body::before {
+        opacity: 0.2 !important;
+    }
+
+    /* Optimize scrolling */
+    html {
+        scroll-behavior: auto; /* Disable smooth scroll on mobile for better performance */
+    }
+
+    /* Reduce blur effects */
+    .gradient-orb {
+        filter: blur(30px) !important;
+    }
+
+    /* Simplify shadows */
+    .btn, .skill-card, .project-card {
+        box-shadow: var(--shadow-sm) !important;
+    }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+    /* Disable hover effects on touch devices */
+    .btn:hover, .skill-card:hover, .project-card:hover, .tech-tag:hover {
+        transform: none !important;
+        box-shadow: var(--shadow-md) !important;
+    }
+
+    /* Ensure buttons are large enough for touch */
+    .btn, .demo-btn {
+        min-height: 44px;
+        padding: 0.75rem 1.5rem;
+    }
+
+    .contact-method {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Responsive breakpoints */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* Stack elements vertically on small screens */
+    .hero-grid, .about-grid, .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* Adjust font sizes */
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    /* Reduce padding */
+    .section {
+        padding: 4rem 0;
+    }
+
+    /* Optimize cards */
+    .skill-card, .project-card {
+        padding: 1.25rem;
+    }
+
+    /* Adjust navigation */
+    .nav-links {
+        display: none; /* Hide on mobile, use hamburger */
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    /* Re-enable animations on desktop */
+    .hero-bg, .about-bg, .skills-bg, .projects-bg, .contact-bg {
+        opacity: 0.7;
+    }
+
+    .floating-particles, .neural-network, .energy-waves {
+        display: block;
+    }
+}
+
+/* Hardware acceleration for better performance */
+.gradient-orb, .particle, .node, .wave, .shape {
+    will-change: transform, opacity;
+    transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Optimize AOS animations for mobile */
+@media (max-width: 768px) {
+    [data-aos] {
+        transition: none !important;
+    }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
