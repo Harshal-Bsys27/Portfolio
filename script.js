@@ -560,7 +560,35 @@ function openProjectModal(data) {
     if (data.repo) { const a = document.createElement('a'); a.href = data.repo; a.target = '_blank'; a.className = 'btn-outline'; a.textContent = 'Repository'; links.appendChild(a); }
     if (data.live) { const a = document.createElement('a'); a.href = data.live; a.target = '_blank'; a.className = 'demo-btn'; a.textContent = 'Live Demo'; links.appendChild(a); }
 
-    projectModal.classList.add('open'); projectModal.setAttribute('aria-hidden', 'false');
+    projectModal.classList.add('open'); 
+    projectModal.setAttribute('aria-hidden', 'false');
+    
+    // Initialize tab functionality
+    initializeModalTabs();
+}
+
+function initializeModalTabs() {
+    const tabs = projectModal.querySelectorAll('.modal-tab');
+    const tabPanes = projectModal.querySelectorAll('.tab-pane');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs
+            tabs.forEach(t => t.classList.remove('active'));
+            // Add active class to clicked tab
+            tab.classList.add('active');
+            
+            // Hide all tab panes
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+            
+            // Show the corresponding tab pane
+            const targetTab = tab.getAttribute('data-tab');
+            const targetPane = projectModal.querySelector(`#${targetTab}`);
+            if (targetPane) {
+                targetPane.classList.add('active');
+            }
+        });
+    });
 }
 
 function closeProjectModal() {
@@ -605,7 +633,7 @@ function initializeCarousel(carousel, totalSlides) {
     }
     
     function startAutoPlay() {
-        autoPlayInterval = setInterval(nextSlide, 4000);
+        autoPlayInterval = setInterval(nextSlide, 5000);
     }
     
     function stopAutoPlay() {

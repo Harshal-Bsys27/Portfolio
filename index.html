@@ -1157,30 +1157,69 @@
         <div class="project-modal-inner">
             <button class="modal-close project-close" aria-label="Close details">&times;</button>
                 <div class="project-modal-body">
-                <h3 class="modal-title">Project Title</h3>
-                <p class="modal-desc">Short description...</p>
+                <!-- Compact header with project info -->
+                <div class="modal-header">
+                    <h3 class="modal-title">Project Title</h3>
+                    
+                    <!-- Tab Navigation -->
+                    <div class="modal-tabs">
+                        <button class="modal-tab active" data-tab="overview">
+                            <i class="fas fa-info-circle"></i> Overview
+                        </button>
+                        <button class="modal-tab" data-tab="details">
+                            <i class="fas fa-tasks"></i> Details
+                        </button>
+                        <button class="modal-tab" data-tab="links">
+                            <i class="fas fa-external-link-alt"></i> Links
+                        </button>
+                    </div>
+                    
+                    <!-- Tab Content -->
+                    <div class="modal-tab-content">
+                        <!-- Overview Tab -->
+                        <div class="tab-pane active" id="overview">
+                            <p class="modal-desc">Short description...</p>
+                            <div class="modal-tech-section">
+                                <h4>Technologies</h4>
+                                <ul class="modal-tech"></ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Details Tab -->
+                        <div class="tab-pane" id="details">
+                            <!-- Case study block (shown only for problem-based projects like CoastVision) -->
+                            <div class="modal-case" style="display:none">
+                                <h4>Problem</h4>
+                                <p class="modal-problem"></p>
 
-                <!-- Case study block (shown only for problem-based projects like CoastVision) -->
-                <div class="modal-case" style="display:none">
-                    <h4>Problem</h4>
-                    <p class="modal-problem"></p>
+                                <h4>Approach</h4>
+                                <ul class="modal-approach"></ul>
 
-                    <h4>Approach</h4>
-                    <ul class="modal-approach"></ul>
+                                <h4>Impact</h4>
+                                <ul class="modal-impact"></ul>
+                            </div>
 
-                    <h4>Impact</h4>
-                    <ul class="modal-impact"></ul>
+                            <!-- Outcomes block: used for standard projects to show concise highlights -->
+                            <div class="modal-outcomes-block" style="display:none">
+                                <h4>Highlights</h4>
+                                <ul class="modal-outcomes"></ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Links Tab -->
+                        <div class="tab-pane" id="links">
+                            <div class="modal-links-section">
+                                <h4>Project Links</h4>
+                                <div class="modal-links"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Outcomes block: used for standard projects to show concise highlights -->
-                <div class="modal-outcomes-block" style="display:none">
-                    <h4>Highlights</h4>
-                    <ul class="modal-outcomes"></ul>
+                <!-- Full-screen screenshots carousel -->
+                <div class="modal-screenshots-section">
+                    <div class="modal-screenshots"></div>
                 </div>
-
-                <div class="modal-screenshots"></div>
-                <ul class="modal-tech"></ul>
-                <div class="modal-links"></div>
             </div>
         </div>
     </div>
