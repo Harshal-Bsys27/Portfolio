@@ -4681,6 +4681,125 @@ section {
     }
 }
 
+/* ========================================
+   PROJECT MODAL CAROUSEL
+   ======================================== */
+
+.screenshot-carousel {
+    position: relative;
+    width: 100%;
+    margin: 1.5rem 0;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.carousel-slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: none;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    display: block;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.carousel-prev, .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-prev:hover, .carousel-next:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.carousel-prev {
+    left: 15px;
+}
+
+.carousel-next {
+    right: 15px;
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+    background: var(--gradient-primary);
+    border-color: var(--primary-color);
+}
+
+.carousel-indicator:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+/* Mobile responsive carousel */
+@media (max-width: 768px) {
+    .carousel-container {
+        height: 250px;
+    }
+    
+    .carousel-prev, .carousel-next {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+}
+
 /* Hardware acceleration for better performance */
 .gradient-orb, .particle, .node, .wave, .shape {
     will-change: transform, opacity;
