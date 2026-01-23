@@ -470,7 +470,7 @@ function openProjectModal(data) {
     impactEl.innerHTML = '';
     outcomesEl.innerHTML = '';
 
-    if (data.caseStudy) {
+    if (data.problem && data.approach && data.impact) {
         caseBlock.style.display = '';
         problemEl.textContent = data.problem || '';
         (data.approach || []).forEach(item => { const li = document.createElement('li'); li.textContent = item; approachEl.appendChild(li); });
