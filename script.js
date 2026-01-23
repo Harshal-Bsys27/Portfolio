@@ -490,10 +490,69 @@ function openProjectModal(data) {
     techList.innerHTML = '';
     (data.tech || []).forEach(t => { const el = document.createElement('span'); el.className = 'tech-tag'; el.textContent = t; techList.appendChild(el); });
 
-    // Screenshots
+    // Screenshots - Create carousel
     const shots = projectModal.querySelector('.modal-screenshots');
     shots.innerHTML = '';
-    (data.screenshots || []).forEach(src => { const img = document.createElement('img'); img.src = src; shots.appendChild(img); });
+    
+    if (data.screenshots && data.screenshots.length > 0) {
+        const carousel = document.createElement('div');
+        carousel.className = 'screenshot-carousel';
+        
+        const container = document.createElement('div');
+        container.className = 'carousel-container';
+        
+        const slides = document.createElement('div');
+        slides.className = 'carousel-slides';
+        
+        data.screenshots.forEach((src, index) => {
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide' + (index === 0 ? ' active' : '');
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `${data.title} screenshot ${index + 1}`;
+            slide.appendChild(img);
+            slides.appendChild(slide);
+        });
+        
+        container.appendChild(slides);
+        
+        // Navigation buttons
+        if (data.screenshots.length > 1) {
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'carousel-prev';
+            prevBtn.innerHTML = '&#10094;';
+            prevBtn.setAttribute('aria-label', 'Previous screenshot');
+            
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'carousel-next';
+            nextBtn.innerHTML = '&#10095;';
+            nextBtn.setAttribute('aria-label', 'Next screenshot');
+            
+            container.appendChild(prevBtn);
+            container.appendChild(nextBtn);
+            
+            // Indicators
+            const indicators = document.createElement('div');
+            indicators.className = 'carousel-indicators';
+            
+            data.screenshots.forEach((_, index) => {
+                const indicator = document.createElement('button');
+                indicator.className = 'carousel-indicator' + (index === 0 ? ' active' : '');
+                indicator.setAttribute('aria-label', `Go to screenshot ${index + 1}`);
+                indicators.appendChild(indicator);
+            });
+            
+            carousel.appendChild(container);
+            carousel.appendChild(indicators);
+            
+            // Initialize carousel functionality
+            initializeCarousel(carousel, data.screenshots.length);
+        } else {
+            carousel.appendChild(container);
+        }
+        
+        shots.appendChild(carousel);
+    }
 
     // Links
     const links = projectModal.querySelector('.modal-links');
@@ -510,6 +569,101 @@ function closeProjectModal() {
 
 projectModalClose.addEventListener('click', closeProjectModal);
 projectModal.addEventListener('click', (e) => { if (e.target === projectModal) closeProjectModal(); });
+
+// ========================================
+// CAROUSEL FUNCTIONALITY
+// ========================================
+function initializeCarousel(carousel, totalSlides) {
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+    const indicators = carousel.querySelectorAll('.carousel-indicator');
+    
+    let currentSlide = 0;
+    let autoPlayInterval;
+    
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === index);
+        });
+        
+        currentSlide = index;
+    }
+    
+    function nextSlide() {
+        const next = (currentSlide + 1) % totalSlides;
+        showSlide(next);
+    }
+    
+    function prevSlide() {
+        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(prev);
+    }
+    
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, 4000);
+    }
+    
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+    
+    // Event listeners
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        prevSlide();
+        startAutoPlay();
+    });
+    
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        nextSlide();
+        startAutoPlay();
+    });
+    
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            stopAutoPlay();
+            showSlide(index);
+            startAutoPlay();
+        });
+    });
+    
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const container = carousel.querySelector('.carousel-container');
+    container.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoPlay();
+    });
+    
+    container.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > 50) { // Minimum swipe distance
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+        startAutoPlay();
+    });
+    
+    // Pause autoplay on hover
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+    
+    // Start autoplay
+    startAutoPlay();
+}
 
 // Wire details buttons to open with simple data map
 const projectData = {
