@@ -22,23 +22,27 @@ window.addEventListener('load', () => {
 });
 
 // ========================================
-// NAVIGATION
+// THEME TOGGLE
 // ========================================
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
+const themeToggle = document.querySelector('.theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
 
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    hamburger.classList.toggle('active');
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    themeIcon.className = document.body.classList.contains('dark-theme') 
+        ? 'fas fa-sun' 
+        : 'fas fa-moon';
+    
+    // Save theme preference
+    localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
 });
 
-// Close menu on link click
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-    });
-});
+// Load saved theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-theme');
+    themeIcon.className = 'fas fa-sun';
+}
 
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -83,6 +87,12 @@ window.addEventListener('scroll', () => {
     } else {
         navbar.classList.remove('scrolled');
     }
+    
+    // Scroll progress bar
+    const scrollProgress = document.querySelector('.scroll-progress-bar');
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollY / totalHeight) * 100;
+    scrollProgress.style.width = progress + '%';
 });
 
 // ========================================
