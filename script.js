@@ -694,7 +694,14 @@ const projectData = {
             'Admin dashboard for bookings and property management.'
         ],
         tech: ['Flask','MongoDB','ReportLab'],
-        screenshots:['https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=500&fit=crop&q=80'],
+        screenshots: [
+            'screenshots/letstravel_packages.png',
+            'screenshots/letstravel_tourpkg.png',
+            'screenshots/letstravel_personalizeditinerary.png',
+            'screenshots/letstravel_checkout.png',
+            'screenshots/letstravel_ticket.png',
+            'screenshots/letstravel_dashboard.png'
+        ],
         repo:'https://github.com/Harshal-Bsys27/LetsTravel',
         live:'https://letstravel-w00j.onrender.com'
     },

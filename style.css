@@ -4149,11 +4149,11 @@ section {
 .project-outcomes li { margin-bottom: 0.5rem; }
 
 /* Project modal styles */
-.project-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(2,6,23,0.8); z-index: 30000; padding: 2rem; }
+.project-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(2,6,23,0.8); z-index: 30000; padding: 1rem; }
 .project-modal.open { display:flex; }
-.project-modal-inner { width:100%; max-width:900px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:1rem; position:relative; }
+.project-modal-inner { width:100%; max-width:1600px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:0.5rem; position:relative; }
 .project-modal .project-close { position:absolute; top:10px; right:10px; background:transparent; color:var(--text-primary); border:none; font-size:2rem; cursor:pointer; }
-.project-modal-body { padding:1rem 1.25rem; }
+.project-modal-body { padding:0.5rem 0.75rem; }
 .modal-title { font-size:1.6rem; margin-bottom:0.5rem; }
 .modal-desc { color:var(--text-secondary); margin-bottom:1rem; }
 .modal-screenshots { display:flex; gap:0.75rem; margin-bottom:1rem; }
@@ -4278,7 +4278,7 @@ section {
 
     /* Make video modal and project modal scrollable and fit smaller screens */
     .video-wrapper iframe { height: min(60vh, 420px); }
-    .project-modal-inner { max-height: 90vh; overflow-y: auto; padding: 0.75rem; }
+    .project-modal-inner { max-height: 95vh; overflow-y: auto; padding: 0.25rem; }
 }
 
 /* Improve modal iframe sizing on large screens too (responsive) */
@@ -4688,44 +4688,54 @@ section {
 .screenshot-carousel {
     position: relative;
     width: 100%;
-    margin: 1.5rem 0;
+    margin: 0.5rem 0;
 }
 
 .carousel-container {
     position: relative;
     width: 100%;
-    height: 400px;
+    min-height: 500px;
+    max-height: 95vh;
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-slides {
-    display: flex;
+    position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.5s ease;
 }
 
 .carousel-slide {
     flex: 0 0 100%;
     width: 100%;
-    height: 100%;
     opacity: 0;
     transition: opacity 0.5s ease;
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .carousel-slide.active {
     opacity: 1;
-    display: block;
+    display: flex;
 }
 
 .carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
     border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 
 .carousel-prev, .carousel-next {
@@ -4790,13 +4800,30 @@ section {
 /* Mobile responsive carousel */
 @media (max-width: 768px) {
     .carousel-container {
-        height: 250px;
+        min-height: 400px;
+        max-height: 85vh;
+    }
+    
+    .carousel-slide img {
+        max-height: 75vh;
     }
     
     .carousel-prev, .carousel-next {
         width: 35px;
         height: 35px;
         font-size: 16px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .carousel-container {
+        min-height: 300px;
+        max-height: 75vh;
+    }
+    
+    .carousel-slide img {
+        max-height: 65vh;
     }
 }
 
