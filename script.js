@@ -755,7 +755,13 @@ const projectData = {
             'Calendar integration for reminders and study sessions.'
         ],
         tech:['React','Flask','MUI'],
-        screenshots:['https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=500&fit=crop&q=80'],
+        screenshots:[
+            'screenshots/studyplanner-loginpage.png',
+            'screenshots/studyplanner-cutomized_plan.png',
+            'screenshots/studyplanner-subjectdashboard_gen.png',
+            'screenshots/studyplan_chart.png',
+            'screenshots/studyplanner-history.png'
+        ],
         repo:'https://github.com/Harshal-Bsys27/ai-study-planner',
         live:'https://ai-study-planner-frontend.onrender.com'
     },
