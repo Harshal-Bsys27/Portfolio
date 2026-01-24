@@ -742,7 +742,13 @@ const projectData = {
             'Generates actionable PDF reports with improvement suggestions.'
         ],
         tech:['React','Flask','NLP','Tailwind'],
-        screenshots:['https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=500&fit=crop&q=80'],
+        screenshots:[
+            'screenshots/hirelens-home.png',
+            'screenshots/hirelens-upload.png',
+            'screenshots/hirelens-role.png',
+            'screenshots/hirelens-result.png',
+            'screenshots/hirelens-chart.png'
+        ],
         repo:'https://github.com/Harshal-Bsys27/AI-Resume-Analyzer-Hirelens',
         live:'#'
     },
