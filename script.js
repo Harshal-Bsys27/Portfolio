@@ -768,7 +768,13 @@ const projectData = {
             'Clean dashboard UI for admins and teachers.'
         ],
         tech:['Flask','SQLite','Bootstrap'],
-        screenshots:['https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=500&fit=crop&q=80'],
+        screenshots:[
+            'screenshots/student_login.png',
+            'screenshots/Studentlist.png',
+            'screenshots/Studentprofile.png',
+            'screenshots/student_Userdashboard.png',
+            'screenshots/student_admindashboard.png'
+        ],
         repo:'https://github.com/Harshal-Bsys27/student-management-system',
         live:'https://student-management-system-4ptl.onrender.com/'
     }
