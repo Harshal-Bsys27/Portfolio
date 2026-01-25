@@ -547,6 +547,24 @@ function openProjectModal(data) {
             container.appendChild(prevBtn);
             container.appendChild(nextBtn);
             
+            // Play / Fullscreen controls (overlay)
+            const controls = document.createElement('div');
+            controls.className = 'carousel-controls';
+
+            const playBtn = document.createElement('button');
+            playBtn.className = 'carousel-play';
+            playBtn.innerHTML = '⏸';
+            playBtn.setAttribute('aria-label', 'Pause slideshow');
+
+            const fsBtn = document.createElement('button');
+            fsBtn.className = 'carousel-fullscreen';
+            fsBtn.innerHTML = '⤢';
+            fsBtn.setAttribute('aria-label', 'Toggle fullscreen');
+
+            controls.appendChild(playBtn);
+            controls.appendChild(fsBtn);
+            container.appendChild(controls);
+            
             // Indicators
             const indicators = document.createElement('div');
             indicators.className = 'carousel-indicators';
@@ -619,6 +637,8 @@ function initializeModalTabs() {
 }
 
 function closeProjectModal() {
+    // Stop any running carousels inside modal
+    projectModal.querySelectorAll('.screenshot-carousel').forEach(c => { try { if (c._stop) c._stop(); } catch(e){} });
     projectModal.classList.remove('open'); projectModal.setAttribute('aria-hidden', 'true');
 }
 
@@ -633,6 +653,8 @@ function initializeCarousel(carousel, totalSlides) {
     const slides = Array.from(slidesContainer.children);
     const prevBtn = carousel.querySelector('.carousel-prev');
     const nextBtn = carousel.querySelector('.carousel-next');
+    const playBtn = carousel.querySelector('.carousel-play');
+    const fsBtn = carousel.querySelector('.carousel-fullscreen');
     const indicators = Array.from(carousel.querySelectorAll('.carousel-indicator'));
     const thumbs = Array.from(carousel.querySelectorAll('.carousel-thumbs img'));
 
@@ -651,8 +673,9 @@ function initializeCarousel(carousel, totalSlides) {
     function nextSlide() { update(currentSlide + 1); }
     function prevSlide() { update(currentSlide - 1); }
 
-    function startAutoPlay() { stopAutoPlay(); autoPlayInterval = setInterval(nextSlide, 4500); }
-    function stopAutoPlay() { if (autoPlayInterval) { clearInterval(autoPlayInterval); autoPlayInterval = null; } }
+    let isPlaying = true;
+    function startAutoPlay() { stopAutoPlay(); autoPlayInterval = setInterval(nextSlide, 4500); isPlaying = true; if (playBtn) { playBtn.innerHTML = '⏸'; playBtn.setAttribute('aria-label','Pause slideshow'); } }
+    function stopAutoPlay() { if (autoPlayInterval) { clearInterval(autoPlayInterval); autoPlayInterval = null; } isPlaying = false; if (playBtn) { playBtn.innerHTML = '▶'; playBtn.setAttribute('aria-label','Play slideshow'); } }
 
     // Buttons
     if (prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
@@ -664,11 +687,49 @@ function initializeCarousel(carousel, totalSlides) {
     // Thumbnails
     thumbs.forEach((thumb, idx) => { thumb.addEventListener('click', () => { stopAutoPlay(); update(idx); startAutoPlay(); }); });
 
+    // Play / Pause button
+    if (playBtn) {
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) { stopAutoPlay(); }
+            else { startAutoPlay(); }
+        });
+    }
+
+    // Fullscreen button
+    if (fsBtn) {
+        fsBtn.addEventListener('click', async () => {
+            try {
+                if (!document.fullscreenElement) {
+                    await carousel.requestFullscreen();
+                } else {
+                    await document.exitFullscreen();
+                }
+            } catch (err) {
+                console.warn('Fullscreen failed', err);
+            }
+        });
+
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                fsBtn.innerHTML = '⤡';
+            } else {
+                fsBtn.innerHTML = '⤢';
+            }
+        });
+    }
+
     // Touch / swipe support
     let startX = 0; let isTouching = false;
     slidesContainer.addEventListener('touchstart', (e) => { isTouching = true; startX = e.touches[0].clientX; stopAutoPlay(); });
     slidesContainer.addEventListener('touchmove', (e) => { if (!isTouching) return; const delta = e.touches[0].clientX - startX; slidesContainer.style.transition = 'none'; slidesContainer.style.transform = `translateX(${ -currentSlide * 100 + (delta / slidesContainer.clientWidth) * 100 }%)`; });
     slidesContainer.addEventListener('touchend', (e) => { isTouching = false; slidesContainer.style.transition = ''; const endX = e.changedTouches[0].clientX; const diff = startX - endX; if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); } else update(currentSlide); startAutoPlay(); });
+
+    // Double click on slides to toggle fullscreen
+    slidesContainer.addEventListener('dblclick', async () => {
+        try {
+            if (!document.fullscreenElement) await carousel.requestFullscreen(); else await document.exitFullscreen();
+        } catch (e) { /* noop */ }
+    });
 
     // Pause on hover (desktop)
     carousel.addEventListener('mouseenter', stopAutoPlay);
@@ -683,6 +744,11 @@ function initializeCarousel(carousel, totalSlides) {
     // Initialize position
     update(0);
     startAutoPlay();
+
+    // expose stop/start so modal close can stop autoplay
+    carousel._stop = stopAutoPlay;
+    carousel._start = startAutoPlay;
+    carousel._isPlaying = () => isPlaying;
 }
 
 // Wire details buttons to open with simple data map
