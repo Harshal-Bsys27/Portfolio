@@ -70,8 +70,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (target) {
             e.preventDefault();
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            try { history.pushState({ section: id }, '', '#' + id); } catch (e) { /* noop */ }
         }
     });
+});
+
+// Ensure initial history state represents current section
+window.addEventListener('DOMContentLoaded', () => {
+    const initial = location.hash ? location.hash.slice(1) : 'home';
+    try { history.replaceState({ section: initial }, '', location.hash || '#home'); } catch (e) { /* noop */ }
 });
 
 // Active nav on scroll
@@ -466,7 +473,7 @@ const projectModal = document.getElementById('project-modal');
 const projectModalInner = document.querySelector('.project-modal-inner');
 const projectModalClose = document.querySelector('.project-close');
 
-function openProjectModal(data) {
+function openProjectModal(data, skipPush = false) {
     projectModal.querySelector('.modal-title').textContent = data.title || 'Project';
     projectModal.querySelector('.modal-desc').textContent = data.desc || '';
 
@@ -605,11 +612,20 @@ function openProjectModal(data) {
     if (data.repo) { const a = document.createElement('a'); a.href = data.repo; a.target = '_blank'; a.className = 'btn-outline'; a.textContent = 'Repository'; links.appendChild(a); }
     if (data.live) { const a = document.createElement('a'); a.href = data.live; a.target = '_blank'; a.className = 'demo-btn'; a.textContent = 'Live Demo'; links.appendChild(a); }
 
+    // remember current hash so we can restore after closing
+    projectModal.dataset.prevHash = location.hash || '#projects';
     projectModal.classList.add('open'); 
     projectModal.setAttribute('aria-hidden', 'false');
     
     // Initialize tab functionality
     initializeModalTabs();
+    // Push history state so back/forward works for modals
+    if (!skipPush) {
+        try {
+            const slug = 'project-' + encodeURIComponent((data.title||'').replace(/\s+/g,'-'));
+            history.pushState({ modal: 'project', project: data.title }, '', '#' + slug);
+        } catch (e) {}
+    }
 }
 
 function initializeModalTabs() {
@@ -640,6 +656,17 @@ function closeProjectModal() {
     // Stop any running carousels inside modal
     projectModal.querySelectorAll('.screenshot-carousel').forEach(c => { try { if (c._stop) c._stop(); } catch(e){} });
     projectModal.classList.remove('open'); projectModal.setAttribute('aria-hidden', 'true');
+
+    // Restore previous hash (URL) and scroll to that section if available
+    try {
+        const prev = projectModal.dataset.prevHash || '';
+        if (prev && prev !== location.hash) {
+            // Update URL without adding an extra history entry
+            history.replaceState({ section: prev.replace('#','') }, '', prev);
+            const el = document.getElementById(prev.replace('#',''));
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    } catch (e) { /* noop */ }
 }
 
 projectModalClose.addEventListener('click', closeProjectModal);
@@ -1098,3 +1125,43 @@ function morphShapes() {
 
 // Morph shapes every 8 seconds
 setInterval(morphShapes, 8000);
+
+// Floating back/forward arrows (global navigation)
+(function createNavArrows(){
+    const nav = document.createElement('div');
+    nav.className = 'nav-arrows';
+    nav.innerHTML = `<button class="nav-back" aria-label="Back">&#x2039;</button><button class="nav-forward" aria-label="Forward">&#x203A;</button>`;
+    document.body.appendChild(nav);
+
+    const back = nav.querySelector('.nav-back');
+    const fwd = nav.querySelector('.nav-forward');
+
+    back.addEventListener('click', (e) => { e.preventDefault(); try { history.back(); } catch (e) {} });
+    fwd.addEventListener('click', (e) => { e.preventDefault(); try { history.forward(); } catch (e) {} });
+
+    // Simple visibility toggle on small screens or when not needed can be added later
+})();
+
+// Handle browser back/forward navigation
+window.addEventListener('popstate', (e) => {
+    const state = e.state;
+    if (!state) {
+        // No state -> default to home
+        closeProjectModal();
+        const home = document.getElementById('home');
+        if (home) home.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+    }
+
+    if (state.modal === 'project') {
+        const pdata = projectData[state.project] || { title: state.project, desc: '' };
+        openProjectModal(pdata, true);
+        return;
+    }
+
+    if (state.section) {
+        closeProjectModal();
+        const el = document.getElementById(state.section);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+});
