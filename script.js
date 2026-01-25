@@ -44,16 +44,32 @@ if (savedTheme === 'dark') {
     themeIcon.className = 'fas fa-sun';
 }
 
-// Smooth scrolling
+// Smooth scrolling — handle '#' and invalid selectors safely
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href') || '';
+
+        // If it's just '#' or empty, scroll to top
+        if (href === '#' || href.trim() === '') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+
+        // Only handle ID targets like '#section'
+        if (!href.startsWith('#')) return;
+
+        const id = href.slice(1);
+        if (!id) {
+            e.preventDefault();
+            return;
+        }
+
+        // Use getElementById to avoid passing an invalid selector to querySelector
+        const target = document.getElementById(id);
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
@@ -515,8 +531,8 @@ function openProjectModal(data) {
         });
         
         container.appendChild(slides);
-        
-        // Navigation buttons
+
+        // Navigation buttons + indicators + thumbnails
         if (data.screenshots.length > 1) {
             const prevBtn = document.createElement('button');
             prevBtn.className = 'carousel-prev';
@@ -534,17 +550,28 @@ function openProjectModal(data) {
             // Indicators
             const indicators = document.createElement('div');
             indicators.className = 'carousel-indicators';
-            
-            data.screenshots.forEach((_, index) => {
+
+            const thumbs = document.createElement('div');
+            thumbs.className = 'carousel-thumbs';
+
+            data.screenshots.forEach((src, index) => {
                 const indicator = document.createElement('button');
                 indicator.className = 'carousel-indicator' + (index === 0 ? ' active' : '');
                 indicator.setAttribute('aria-label', `Go to screenshot ${index + 1}`);
                 indicators.appendChild(indicator);
+
+                const thumb = document.createElement('img');
+                thumb.src = src;
+                thumb.alt = `${data.title} thumbnail ${index + 1}`;
+                if (index === 0) thumb.classList.add('active');
+                thumb.dataset.index = index;
+                thumbs.appendChild(thumb);
             });
-            
+
             carousel.appendChild(container);
             carousel.appendChild(indicators);
-            
+            carousel.appendChild(thumbs);
+
             // Initialize carousel functionality
             initializeCarousel(carousel, data.screenshots.length);
         } else {
@@ -602,94 +629,59 @@ projectModal.addEventListener('click', (e) => { if (e.target === projectModal) c
 // CAROUSEL FUNCTIONALITY
 // ========================================
 function initializeCarousel(carousel, totalSlides) {
-    const slides = carousel.querySelectorAll('.carousel-slide');
+    const slidesContainer = carousel.querySelector('.carousel-slides');
+    const slides = Array.from(slidesContainer.children);
     const prevBtn = carousel.querySelector('.carousel-prev');
     const nextBtn = carousel.querySelector('.carousel-next');
-    const indicators = carousel.querySelectorAll('.carousel-indicator');
-    
+    const indicators = Array.from(carousel.querySelectorAll('.carousel-indicator'));
+    const thumbs = Array.from(carousel.querySelectorAll('.carousel-thumbs img'));
+
     let currentSlide = 0;
-    let autoPlayInterval;
-    
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-        });
-        
-        indicators.forEach((indicator, i) => {
-            indicator.classList.toggle('active', i === index);
-        });
-        
-        currentSlide = index;
+    let autoPlayInterval = null;
+
+    function update(index) {
+        currentSlide = (index + totalSlides) % totalSlides;
+        const offset = -currentSlide * 100;
+        slidesContainer.style.transform = `translateX(${offset}%)`;
+
+        indicators.forEach((ind, i) => ind.classList.toggle('active', i === currentSlide));
+        thumbs.forEach((t, i) => t.classList.toggle('active', i === currentSlide));
     }
-    
-    function nextSlide() {
-        const next = (currentSlide + 1) % totalSlides;
-        showSlide(next);
-    }
-    
-    function prevSlide() {
-        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
-        showSlide(prev);
-    }
-    
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(nextSlide, 5000);
-    }
-    
-    function stopAutoPlay() {
-        clearInterval(autoPlayInterval);
-    }
-    
-    // Event listeners
-    if (prevBtn) prevBtn.addEventListener('click', () => {
-        stopAutoPlay();
-        prevSlide();
-        startAutoPlay();
-    });
-    
-    if (nextBtn) nextBtn.addEventListener('click', () => {
-        stopAutoPlay();
-        nextSlide();
-        startAutoPlay();
-    });
-    
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-            stopAutoPlay();
-            showSlide(index);
-            startAutoPlay();
-        });
-    });
-    
-    // Touch/swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    const container = carousel.querySelector('.carousel-container');
-    container.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        stopAutoPlay();
-    });
-    
-    container.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > 50) { // Minimum swipe distance
-            if (diff > 0) {
-                nextSlide();
-            } else {
-                prevSlide();
-            }
-        }
-        startAutoPlay();
-    });
-    
-    // Pause autoplay on hover
+
+    function nextSlide() { update(currentSlide + 1); }
+    function prevSlide() { update(currentSlide - 1); }
+
+    function startAutoPlay() { stopAutoPlay(); autoPlayInterval = setInterval(nextSlide, 4500); }
+    function stopAutoPlay() { if (autoPlayInterval) { clearInterval(autoPlayInterval); autoPlayInterval = null; } }
+
+    // Buttons
+    if (prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { stopAutoPlay(); nextSlide(); startAutoPlay(); });
+
+    // Indicators
+    indicators.forEach((indicator, idx) => { indicator.addEventListener('click', () => { stopAutoPlay(); update(idx); startAutoPlay(); }); });
+
+    // Thumbnails
+    thumbs.forEach((thumb, idx) => { thumb.addEventListener('click', () => { stopAutoPlay(); update(idx); startAutoPlay(); }); });
+
+    // Touch / swipe support
+    let startX = 0; let isTouching = false;
+    slidesContainer.addEventListener('touchstart', (e) => { isTouching = true; startX = e.touches[0].clientX; stopAutoPlay(); });
+    slidesContainer.addEventListener('touchmove', (e) => { if (!isTouching) return; const delta = e.touches[0].clientX - startX; slidesContainer.style.transition = 'none'; slidesContainer.style.transform = `translateX(${ -currentSlide * 100 + (delta / slidesContainer.clientWidth) * 100 }%)`; });
+    slidesContainer.addEventListener('touchend', (e) => { isTouching = false; slidesContainer.style.transition = ''; const endX = e.changedTouches[0].clientX; const diff = startX - endX; if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); } else update(currentSlide); startAutoPlay(); });
+
+    // Pause on hover (desktop)
     carousel.addEventListener('mouseenter', stopAutoPlay);
     carousel.addEventListener('mouseleave', startAutoPlay);
-    
-    // Start autoplay
+
+    // Keyboard support
+    carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { stopAutoPlay(); prevSlide(); startAutoPlay(); }
+        if (e.key === 'ArrowRight') { stopAutoPlay(); nextSlide(); startAutoPlay(); }
+    });
+
+    // Initialize position
+    update(0);
     startAutoPlay();
 }
 
@@ -709,7 +701,11 @@ const projectData = {
             'Reduced manual monitoring overhead by enabling automated alerts to lifeguards.',
             'Model optimized to run on Raspberry Pi-class devices for on-premise deployment.'
         ],
-        screenshots: ['https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=500&fit=crop&q=80'],
+        screenshots: [
+            'screenshots/Coastvision_detections.png',
+            'screenshots/Coastvision_zoomzone.png',
+            'screenshots/Coastvision_mockdash.png'
+        ],
         repo: 'https://github.com/Harshal-Bsys27/CoastVision',
         live: '#'
     },
@@ -805,6 +801,8 @@ document.querySelectorAll('.details-btn').forEach(btn => {
         openProjectModal(data);
     });
 });
+
+// (project card preview slideshow removed — keep splash images static)
 
 // ========================================
 // HERO INTERACTIVE EFFECTS
