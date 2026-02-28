@@ -790,7 +790,8 @@
         }
 
         function fetchData() {
-            return fetch('https://github-contributions-api.jogruber.de/v4/' + USERNAME + '?y=last')
+            var cacheBust = '_t=' + Math.floor(Date.now() / 60000); // bust cache every minute
+            return fetch('https://github-contributions-api.jogruber.de/v4/' + USERNAME + '?y=last&' + cacheBust, { cache: 'no-store' })
                 .then(function(res) {
                     if (!res.ok) throw new Error('API ' + res.status);
                     return res.json();
