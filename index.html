@@ -25,37 +25,55 @@
         <div class="container">
             <div class="logo">
                 <div class="logo-icon">
-                    <span class="logo-letter">H</span>
-                    <span class="logo-letter">B</span>
-                    <div class="logo-pulse"></div>
+                    <div class="logo-glow"></div>
+                    <svg class="logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2 L36 11 L36 29 L20 38 L4 29 L4 11 Z" fill="url(#logoGrad)" stroke="url(#logoStroke)" stroke-width="0.8"/>
+                        <path d="M11 12 L11 28" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M20 12 L20 28" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M11 20 L20 20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M20 12 Q28 12 28 16.5 Q28 20 20 20" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                        <path d="M20 20 Q29 20 29 24.5 Q29 28 20 28" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#0d9488"/>
+                                <stop offset="40%" stop-color="#0891b2"/>
+                                <stop offset="100%" stop-color="#6366f1"/>
+                            </linearGradient>
+                            <linearGradient id="logoStroke" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="rgba(13,148,136,0.4)"/>
+                                <stop offset="100%" stop-color="rgba(99,102,241,0.4)"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="logo-shimmer"></div>
                 </div>
-                <span class="logo-text">Harshal<span class="accent">Barhate</span></span>
+                <span class="logo-text"><span class="logo-first">Harshal</span><span class="logo-dot">.</span><span class="logo-last">Barhate</span></span>
             </div>
             
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active" data-section="home">
+                    <i class="fas fa-house nav-icon"></i>
                     <span class="nav-text">Home</span>
-                    <span class="nav-indicator"></span>
                 </a></li>
                 <li><a href="#skills" class="nav-link" data-section="skills">
+                    <i class="fas fa-code nav-icon"></i>
                     <span class="nav-text">Skills</span>
-                    <span class="nav-indicator"></span>
                 </a></li>
                 <li><a href="#certifications" class="nav-link" data-section="certifications">
+                    <i class="fas fa-award nav-icon"></i>
                     <span class="nav-text">Certs</span>
-                    <span class="nav-indicator"></span>
                 </a></li>
                 <li><a href="#github" class="nav-link" data-section="github">
+                    <i class="fab fa-github nav-icon"></i>
                     <span class="nav-text">GitHub</span>
-                    <span class="nav-indicator"></span>
                 </a></li>
                 <li><a href="#projects" class="nav-link" data-section="projects">
+                    <i class="fas fa-diagram-project nav-icon"></i>
                     <span class="nav-text">Projects</span>
-                    <span class="nav-indicator"></span>
                 </a></li>
                 <li><a href="#contact" class="nav-link" data-section="contact">
+                    <i class="fas fa-paper-plane nav-icon"></i>
                     <span class="nav-text">Contact</span>
-                    <span class="nav-indicator"></span>
                 </a></li>
             </ul>
 
@@ -1003,7 +1021,7 @@
                         </ul>
 
                         <!-- Demo Section -->
-                        <div class="project-demo">
+                        <div class="project-demo vertical">
                             <a href="#" class="demo-btn video" data-live="#" data-video="https://www.youtube.com/embed/ysz5S6PUM-U" target="_blank" rel="noopener noreferrer">
                                 <i class="fas fa-video"></i> Watch Demo Video
                             </a>
