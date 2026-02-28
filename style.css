@@ -4121,7 +4121,34 @@ body:not(.dark-theme) .contribution-calendar-full {
     }
 }
 
+/* Swipe hint — mobile only */
+.swipe-hint {
+    display: none;
+}
+
 @media (max-width: 768px) {
+    .swipe-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        opacity: 0.6;
+        margin-top: 0.5rem;
+        animation: swipeNudge 2s ease-in-out infinite;
+    }
+
+    .swipe-hint i {
+        font-size: 0.85rem;
+        color: var(--primary);
+    }
+
+    @keyframes swipeNudge {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(6px); }
+    }
+
     .hamburger {
         display: flex;
     }
@@ -4154,12 +4181,45 @@ body:not(.dark-theme) .contribution-calendar-full {
     
     .projects-grid,
     .skills-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary) transparent;
+    }
+
+    .projects-grid::-webkit-scrollbar,
+    .skills-grid::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .projects-grid::-webkit-scrollbar-thumb,
+    .skills-grid::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 4px;
+    }
+
+    .projects-grid::-webkit-scrollbar-track,
+    .skills-grid::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .skills-grid > .skill-card {
+        flex: 0 0 250px;
+        scroll-snap-align: start;
+    }
+
+    .projects-grid > .project-card {
+        flex: 0 0 300px;
+        scroll-snap-align: start;
     }
 
     /* Stack demo buttons vertically on small screens for better tap targets */
-    .project-demo { flex-direction: column; align-items: stretch; }
-    .project-demo .demo-btn, .project-demo .btn-outline { width: 100%; max-width: 100%; margin: 0.35rem 0; }
+    .project-demo { flex-direction: row; flex-wrap: wrap; align-items: center; }
+    .project-demo .demo-btn, .project-demo .btn-outline { flex: 1; min-width: 0; margin: 0.2rem; font-size: 0.78rem; padding: 0.5rem 0.6rem; }
     
     .floating-tech {
         display: none;
@@ -4323,8 +4383,32 @@ body:not(.dark-theme) .contribution-calendar-full {
 
     /* Optimize certifications for mobile */
     .certifications-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary) transparent;
+    }
+
+    .certifications-grid::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .certifications-grid::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 4px;
+    }
+
+    .certifications-grid::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .certifications-grid > .cert-card {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
     }
 
     .cert-card {
