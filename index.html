@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Preloader -->
@@ -37,16 +37,12 @@
                     <span class="nav-text">Home</span>
                     <span class="nav-indicator"></span>
                 </a></li>
-                <li><a href="#about" class="nav-link" data-section="about">
-                    <span class="nav-text">About</span>
-                    <span class="nav-indicator"></span>
-                </a></li>
                 <li><a href="#skills" class="nav-link" data-section="skills">
                     <span class="nav-text">Skills</span>
                     <span class="nav-indicator"></span>
                 </a></li>
                 <li><a href="#certifications" class="nav-link" data-section="certifications">
-                    <span class="nav-text">Certifications</span>
+                    <span class="nav-text">Certs</span>
                     <span class="nav-indicator"></span>
                 </a></li>
                 <li><a href="#github" class="nav-link" data-section="github">
@@ -98,10 +94,9 @@
 
                     <div class="hero-title-wrap">
                         <h1 class="hero-title">
-                            Hi, I'm<br>
+                            Hi, I'm <span class="hero-hb-inline">HB</span><br>
                             <span class="hero-name">Harshal Barhate</span>
                         </h1>
-                        <div class="hero-hb">HB</div>
                     </div>
 
                     <p class="hero-subtitle">
@@ -140,44 +135,37 @@
                 </div>
 
                 <div class="hero-right" data-aos="fade-left">
-                    <div class="hero-showcase" role="img" aria-label="Animated AI and full-stack showcase">
-                        <div class="showcase-glow" aria-hidden="true"></div>
-
-                        <div class="showcase-header">
-                            <div class="showcase-chip">AI • Full‑Stack</div>
-                            <div class="showcase-status"><span class="badge-dot" aria-hidden="true"></span>Open to Work</div>
-                        </div>
-
-                        <div class="showcase-radar" aria-hidden="true">
-                            <span class="ring ring-1"></span>
-                            <span class="ring ring-2"></span>
-                            <span class="ring ring-3"></span>
-                            <span class="sweep"></span>
-                            <span class="blip blip-1"></span>
-                            <span class="blip blip-2"></span>
-                            <span class="blip blip-3"></span>
-                        </div>
-
-                        <div class="showcase-expertise" aria-label="Tech expertise">
-                            <div class="expertise-title">Core Expertise</div>
-                            <div class="expertise-grid">
-                                <div class="expertise-item" data-aos="fade-up" data-aos-delay="100">
-                                    <i class="fas fa-brain" aria-hidden="true"></i>
-                                    <span>AI & ML</span>
-                                </div>
-                                <div class="expertise-item" data-aos="fade-up" data-aos-delay="200">
-                                    <i class="fab fa-python" aria-hidden="true"></i>
-                                    <span>Python</span>
-                                </div>
-                                <div class="expertise-item" data-aos="fade-up" data-aos-delay="300">
-                                    <i class="fab fa-react" aria-hidden="true"></i>
-                                    <span>React</span>
-                                </div>
-                                <div class="expertise-item" data-aos="fade-up" data-aos-delay="400">
-                                    <i class="fas fa-code" aria-hidden="true"></i>
-                                    <span>Full-Stack</span>
-                                </div>
+                    <div class="hero-bento">
+                        <div class="bento-cell bento-monogram">
+                            <svg class="mono-rings" viewBox="0 0 120 120" fill="none">
+                                <circle cx="60" cy="60" r="54" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                                <circle cx="60" cy="60" r="44" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="6 4" class="ring-spin"/>
+                                <circle cx="60" cy="60" r="34" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                            </svg>
+                            <div class="mono-split">
+                                <span class="mono-h">H</span><span class="mono-b">B</span>
                             </div>
+                            <div class="mono-shimmer"></div>
+                        </div>
+                        <div class="bento-cell bento-code">
+                            <div class="code-line"><span class="cl-kw">import</span> torch</div>
+                            <div class="code-line">net = <span class="cl-fn">VisionNet</span>()</div>
+                            <div class="code-line">out = net(<span class="cl-var">img</span>)</div>
+                            <div class="code-line"><span class="cl-cm"># accuracy: 98.5%</span></div>
+                        </div>
+                        <div class="bento-cell bento-tech">
+                            <div class="tech-icons">
+                                <i class="fab fa-python" title="Python"></i>
+                                <i class="fas fa-brain" title="AI/ML"></i>
+                                <i class="fas fa-eye" title="Computer Vision"></i>
+                                <i class="fab fa-react" title="React"></i>
+                                <i class="fab fa-node-js" title="Node.js"></i>
+                                <i class="fas fa-database" title="Data"></i>
+                            </div>
+                        </div>
+                        <div class="bento-cell bento-stat">
+                            <span class="stat-num">10+</span>
+                            <span class="stat-label">Projects Built</span>
                         </div>
                     </div>
                 </div>

@@ -901,7 +901,7 @@ document.querySelectorAll('.details-btn').forEach(btn => {
 
 // Magnetic cursor effect for buttons and interactive elements
 document.addEventListener('DOMContentLoaded', () => {
-    const magneticElements = document.querySelectorAll('.btn, .icon-btn, .highlight-inline, .hero-hb');
+    const magneticElements = document.querySelectorAll('.btn, .icon-btn, .highlight-inline');
     
     magneticElements.forEach(element => {
         element.addEventListener('mousemove', (e) => {
@@ -924,17 +924,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Name animation enhancement - removed for cleaner look
 
-// Hero showcase interaction
-const heroShowcase = document.querySelector('.hero-showcase');
-if (heroShowcase) {
-    heroShowcase.addEventListener('mouseenter', () => {
-        heroShowcase.style.transform = 'scale(1.02) rotate(1deg)';
-    });
-    
-    heroShowcase.addEventListener('mouseleave', () => {
-        heroShowcase.style.transform = 'scale(1) rotate(0deg)';
-    });
-}
+
 
 // Typing effect enhancement with sound-like visual feedback
 const originalType = window.type;
