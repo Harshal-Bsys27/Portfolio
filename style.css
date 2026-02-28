@@ -70,6 +70,87 @@
     --shadow-xl: 0 20px 60px rgba(102, 126, 234, 0.4);
 }
 
+/* ========================================
+   LIGHT THEME OVERRIDES
+   (make cards/borders/backgrounds adapt)
+   ======================================== */
+body:not(.dark-theme) .info-card,
+body:not(.dark-theme) .about-card,
+body:not(.dark-theme) .skill-card,
+body:not(.dark-theme) .project-card,
+body:not(.dark-theme) .contact-method,
+body:not(.dark-theme) .stat-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+body:not(.dark-theme) .info-card:hover,
+body:not(.dark-theme) .skill-card:hover,
+body:not(.dark-theme) .project-card:hover,
+body:not(.dark-theme) .contact-method:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.12);
+}
+
+body:not(.dark-theme) .form-group input,
+body:not(.dark-theme) .form-group textarea {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
+}
+
+body:not(.dark-theme) .form-group input:focus,
+body:not(.dark-theme) .form-group textarea:focus {
+    background: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+body:not(.dark-theme) .chip {
+    background: rgba(102, 126, 234, 0.06);
+    border-color: rgba(102, 126, 234, 0.18);
+    color: var(--text-secondary);
+}
+
+body:not(.dark-theme) .btn-outline {
+    border-color: rgba(0, 0, 0, 0.12);
+    color: var(--text-primary);
+}
+
+body:not(.dark-theme) .btn-outline:hover {
+    border-color: var(--primary);
+    background: rgba(102, 126, 234, 0.06);
+}
+
+body:not(.dark-theme) .about-quote {
+    background: rgba(102, 126, 234, 0.04);
+}
+
+body:not(.dark-theme) .project-modal-inner {
+    background: #fff;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body:not(.dark-theme) .section-tag {
+    background: rgba(102, 126, 234, 0.06);
+}
+
+body:not(.dark-theme) .category-title {
+    border-bottom-color: rgba(102, 126, 234, 0.12);
+}
+
+/* Global focus-visible ring for accessibility */
+*:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
 /* Reset & Base */
 * {
     margin: 0;
@@ -80,7 +161,16 @@
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    font-size: 16px;
 }
+
+/* Global smooth transitions for theme switching */
+body, .navbar, .btn, .skill-card, .project-card, .info-card, .contact-method, .form-group input, .form-group textarea {
+    transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+::selection { background: var(--primary); color: #fff; }
+::-moz-selection { background: var(--primary); color: #fff; }
 
 body {
     font-family: var(--font-primary);
@@ -4014,6 +4104,12 @@ section {
     transform: scale(1.1) rotate(5deg);
 }
 
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
 .form-group {
     position: relative;
     opacity: 0;
@@ -4074,23 +4170,56 @@ section {
    ======================================== */
 .footer {
     background: var(--bg-darker);
-    padding: 2rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 3rem 0 2rem;
+    border-top: 1px solid rgba(102, 126, 234, 0.15);
+    position: relative;
 }
 
 .footer-content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    gap: 1.25rem;
+    text-align: center;
 }
 
 .footer p {
     color: var(--text-secondary);
+    font-size: 0.95rem;
 }
 
 .footer i {
     color: var(--accent);
     margin: 0 0.25rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.footer-social a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(102, 126, 234, 0.08);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.footer-social a:hover {
+    background: var(--gradient-primary);
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
 }
 
 .footer-links a {
@@ -4102,6 +4231,41 @@ section {
 
 .footer-links a:hover {
     color: var(--accent);
+}
+
+/* Scroll-to-top button */
+.scroll-top-btn {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 5rem;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: none;
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(102, 126, 234, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(102, 126, 234, 0.5);
 }
 
 /* ========================================
@@ -4473,6 +4637,54 @@ section {
 /* Ensure project images don't force too-tall cards on very small screens */
 @media (max-width: 420px) {
     .project-image { height: 160px; }
+}
+
+/* ========================================
+   ENHANCED RESPONSIVE POLISH
+   ======================================== */
+
+/* Tablet & small laptop */
+@media (max-width: 1024px) {
+    section { padding: 4rem 0; }
+    .section-title { font-size: 2.4rem; }
+    .about-ctas { flex-wrap: wrap; }
+    .about-ctas .btn { font-size: 0.88rem; padding: 0.6rem 1.1rem; }
+    .contact-grid { gap: 2.5rem; }
+}
+
+/* Mobile-specific polish */
+@media (max-width: 768px) {
+    section { padding: 3.5rem 0; }
+    .section-header { margin-bottom: 2.5rem; }
+    .section-title { font-size: 1.85rem; }
+    .section-tag { font-size: 0.8rem; padding: 0.4rem 1.1rem; }
+    .about-ctas { flex-direction: column; align-items: stretch; }
+    .about-ctas .btn { text-align: center; }
+    .category-title { font-size: 1.35rem; gap: 0.65rem; }
+    .skill-card { padding: 1.35rem; }
+    .skill-icon { width: 56px; height: 56px; font-size: 1.75rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-info h3 { font-size: 1.55rem; }
+    .method-icon { width: 48px; height: 48px; font-size: 1.25rem; }
+    .hero-highlights { gap: 0.4rem; }
+    .highlight-inline { font-size: 0.8rem; padding: 0.3rem 0.7rem; }
+    .nav-arrows { bottom: 0.65rem; right: 0.65rem; }
+    .nav-arrows button { width: 36px; height: 36px; font-size: 1.1rem; }
+    .scroll-top-btn { width: 40px; height: 40px; right: 0.65rem; bottom: 4rem; font-size: 1rem; }
+}
+
+/* Small phone */
+@media (max-width: 380px) {
+    .hero-title { font-size: 1.7rem; }
+    .hero-description { font-size: 0.92rem; }
+    .hero-hb { display: none; }
+    .about-grid { gap: 1rem; }
+    .about-right { grid-template-columns: 1fr !important; }
+    .info-card { padding: 0.8rem; }
+    .skill-card h4 { font-size: 1.1rem; }
+    .project-content { padding: 0.85rem; }
+    .project-title { font-size: 1.2rem; }
+    .project-desc { font-size: 0.88rem; }
 }
 
 /* About Section Background Animation Keyframes */
@@ -4998,16 +5210,34 @@ section {
     .modal-title { font-size: 1.5rem; }
 }
 
-/* Hardware acceleration for better performance */
-.gradient-orb, .particle, .node, .wave, .shape {
-    will-change: transform, opacity;
-    transform: translateZ(0); /* Force hardware acceleration */
+/* Hardware acceleration — only apply will-change during active interaction */
+.gradient-orb {
+    will-change: transform;
+    transform: translateZ(0);
+}
+/* Particles, nodes, waves, shapes — no permanent will-change (saves GPU memory) */
+.particle, .node, .wave, .shape {
+    transform: translateZ(0);
+}
+
+/* Off-screen section rendering optimisation */
+section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
 }
 
 /* Optimize AOS animations for mobile */
 @media (max-width: 768px) {
     [data-aos] {
         transition: none !important;
+    }
+    /* Pause heavy decorative animations on mobile to save battery & CPU */
+    .particle, .particle-dot, .node, .connection,
+    .wave, .energy-wave, .shape, .blob,
+    .code-snippet, .data-stream, .spark, .star,
+    .constellation-line, .dev-wave, .floating-icon,
+    .skill-particle, .skill-node, .skill-connection {
+        animation: none !important;
     }
 }
 
@@ -5019,4 +5249,141 @@ section {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+}
+
+/* ========================================
+   GENERAL VISUAL POLISH
+   ======================================== */
+
+/* Section divider lines between sections */
+section + section::before {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 3px;
+    margin: 0 auto 3rem;
+}
+
+/* Glassmorphism card effect for dark theme */
+.dark-theme .skill-card,
+.dark-theme .info-card,
+.dark-theme .contact-method {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Better button padding consistency */
+.btn { letter-spacing: 0.02em; }
+.btn-primary { font-weight: 600; }
+
+/* Project card image smooth zoom */
+.project-image img {
+    transition: transform 0.6s cubic-bezier(0.22, 0.9, 0.32, 1);
+}
+
+/* Improved section-tag pill */
+.section-tag {
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* About quote decoration */
+.about-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.2rem;
+    left: 0.4rem;
+    font-size: 3rem;
+    color: var(--primary);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+/* Contact form submit button full-width */
+.contact-form .btn-block {
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border-radius: 12px;
+}
+
+/* Method info text */
+.method-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+.method-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Skill category smooth separator */
+.skill-category + .skill-category {
+    border-top: 1px solid rgba(102, 126, 234, 0.08);
+    padding-top: 2.5rem;
+}
+
+/* Project card featured glow (subtle) */
+.project-card.featured {
+    border-color: rgba(102, 126, 234, 0.2);
+    box-shadow: 0 4px 24px rgba(102, 126, 234, 0.08);
+}
+
+.project-card.featured:hover {
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
+}
+
+/* Smooth page entrance */
+@keyframes pageEnter {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+    animation: pageEnter 0.6s ease-out;
+}
+
+/* Nicer scrollbar (webkit) */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-darker); }
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+
+/* Responsive nav-arrows hide when modal open to avoid overlap confusion */
+.project-modal.open ~ .nav-arrows,
+.video-modal.open ~ .nav-arrows { opacity: 0.3; }
+
+/* ========================================
+   PERFORMANCE: Reduce concurrent animation cost
+   ======================================== */
+/* On smaller viewports, simplify hero background by hiding heavy layers */
+@media (max-width: 1024px) {
+    .neural-network,
+    .energy-waves,
+    .geometric-shapes,
+    .data-streams,
+    .code-snippets,
+    .particle-orbit-system,
+    .morphing-blobs,
+    .circuit-board,
+    .data-flow-lines,
+    .mouse-follower {
+        display: none !important;
+    }
+}
+/* On larger screens, run decorative animations only when hero is in view */
+.hero .floating-particles,
+.hero .neural-network,
+.hero .energy-waves {
+    animation-play-state: running;
 }

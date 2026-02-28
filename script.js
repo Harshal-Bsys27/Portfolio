@@ -81,42 +81,99 @@ window.addEventListener('DOMContentLoaded', () => {
     try { history.replaceState({ section: initial }, '', location.hash || '#home'); } catch (e) { /* noop */ }
 });
 
-// Active nav on scroll
+// ========================================
+// HAMBURGER MENU TOGGLE
+// ========================================
+const hamburger = document.querySelector('.hamburger');
+const navLinksEl = document.querySelector('.nav-links');
+
+if (hamburger && navLinksEl) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinksEl.classList.toggle('active');
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = navLinksEl.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close mobile nav when a link is clicked
+    navLinksEl.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinksEl.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+}
+
+// ========================================
+// SCROLL-TO-TOP BUTTON
+// ========================================
+const scrollTopBtn = document.querySelector('.scroll-top-btn');
+if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ========================================
+// UNIFIED SCROLL HANDLER (RAF-throttled)
+// ========================================
 const sections = document.querySelectorAll('section');
 const navItems = document.querySelectorAll('.nav-link');
+const _navbar = document.querySelector('.navbar');
+const _scrollProgress = document.querySelector('.scroll-progress-bar');
+const _aboutSection = document.querySelector('#about');
+const _parallaxOrbs = document.querySelectorAll('.gradient-orb');
+let _scrollTicking = false;
+
+function _onScroll() {
+    const sy = window.scrollY || window.pageYOffset;
+
+    // 1. Scroll-to-top visibility
+    if (scrollTopBtn) scrollTopBtn.classList.toggle('visible', sy > 500);
+
+    // 2. Active nav link
+    let current = '';
+    for (let i = 0; i < sections.length; i++) {
+        if (sy >= sections[i].offsetTop - 200) current = sections[i].id;
+    }
+    navItems.forEach(item => {
+        item.classList.toggle('active', item.getAttribute('href').substring(1) === current);
+    });
+
+    // 3. Navbar scrolled class
+    _navbar.classList.toggle('scrolled', sy > 100);
+
+    // 4. Scroll progress bar
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    if (total > 0 && _scrollProgress) _scrollProgress.style.width = ((sy / total) * 100) + '%';
+
+    // 5. Counter trigger (one-shot)
+    if (!counterStarted && _aboutSection) {
+        const r = _aboutSection.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) { counterStarted = true; animateCounters(); }
+    }
+
+    // 6. Skills animation trigger (one-shot)
+    if (skillSection && !skillsAnimated) {
+        const r = skillSection.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+            skillsAnimated = true;
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+                bar.style.setProperty('--progress-width', bar.getAttribute('data-progress') + '%');
+            });
+        }
+    }
+
+    // 7. Parallax gradient orbs
+    _parallaxOrbs.forEach((el, i) => { el.style.transform = `translateY(${sy * (i + 1) * 0.1}px)`; });
+
+    _scrollTicking = false;
+}
 
 window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('href').substring(1) === current) {
-            item.classList.add('active');
-        }
-    });
-    
-    // Navbar background on scroll
-    const navbar = document.querySelector('.navbar');
-    if (scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-    
-    // Scroll progress bar
-    const scrollProgress = document.querySelector('.scroll-progress-bar');
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (scrollY / totalHeight) * 100;
-    scrollProgress.style.width = progress + '%';
-});
+    if (!_scrollTicking) { requestAnimationFrame(_onScroll); _scrollTicking = true; }
+}, { passive: true });
 
 // ========================================
 // TYPING EFFECT
@@ -186,38 +243,14 @@ function animateCounters() {
     });
 }
 
-// Trigger counter animation on scroll
-if (counters.length > 0) {
-    window.addEventListener('scroll', () => {
-        const aboutSection = document.querySelector('#about');
-        if (aboutSection && !counterStarted) {
-            const rect = aboutSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                counterStarted = true;
-                animateCounters();
-            }
-        }
-    });
-}
+// Counter trigger is handled by the unified scroll handler above
 
 // ========================================
 // SKILL PROGRESS ANIMATION
 // ========================================
 const skillSection = document.querySelector('#skills');
 let skillsAnimated = false;
-
-window.addEventListener('scroll', () => {
-    if (skillSection && !skillsAnimated) {
-        const rect = skillSection.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-            skillsAnimated = true;
-            document.querySelectorAll('.progress-bar').forEach(bar => {
-                const progress = bar.getAttribute('data-progress');
-                bar.style.setProperty('--progress-width', progress + '%');
-            });
-        }
-    }
-});
+// Skills trigger is handled by the unified scroll handler above
 
 // ========================================
 // FORM SUBMISSION - open user's email client via mailto:
@@ -262,17 +295,8 @@ contactForm.addEventListener('submit', (e) => {
 });
 
 // ========================================
-// PARALLAX EFFECT
+// PARALLAX EFFECT — handled by unified scroll handler
 // ========================================
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.gradient-orb');
-    
-    parallaxElements.forEach((el, index) => {
-        const speed = (index + 1) * 0.1;
-        el.style.transform = `translateY(${scrolled * speed}px)`;
-    });
-});
 
 // ========================================
 // PROJECT CARD TILT EFFECT
@@ -304,13 +328,8 @@ if (!('ontouchstart' in window)) {
 }
 
 // ========================================
-// FLOATING TECH ICONS ANIMATION
+// FLOATING TECH ICONS — CSS-only animation (no JS interval needed)
 // ========================================
-document.querySelectorAll('.floating-tech').forEach((tech, index) => {
-    setInterval(() => {
-        tech.style.transform = `translateY(${Math.sin(Date.now() / 1000 + index) * 10}px) rotate(${Math.sin(Date.now() / 2000) * 5}deg)`;
-    }, 50);
-});
 
 // ========================================
 // SCROLL TO TOP
@@ -327,9 +346,13 @@ if (footerLink) {
 }
 
 // ========================================
-// KEYBOARD NAVIGATION
+// KEYBOARD NAVIGATION (only when no input focused)
 // ========================================
 document.addEventListener('keydown', (e) => {
+    // Don't intercept typing in inputs/textareas
+    const tag = (document.activeElement || {}).tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    
     // Press 'h' to go to home
     if (e.key === 'h' && !e.ctrlKey) {
         document.querySelector('#home').scrollIntoView({ behavior: 'smooth' });
@@ -922,16 +945,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Enhanced particle interaction
-document.addEventListener('mousemove', (e) => {
-    const particles = document.querySelectorAll('.particle');
-    particles.forEach((particle, index) => {
-        const speed = (index + 1) * 0.5;
-        const x = (e.clientX * speed) / 100;
-        const y = (e.clientY * speed) / 100;
-        particle.style.transform = `translate(${x}px, ${y}px)`;
-    });
-});
+// Particle interaction is handled by the throttled handler below
 
 // Name animation enhancement - removed for cleaner look
 
@@ -959,17 +973,7 @@ window.type = function() {
     }
 };
 
-// Scroll-triggered particle acceleration
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const rate = scrolled * -0.5;
-    
-    const particles = document.querySelectorAll('.particle');
-    particles.forEach((particle, index) => {
-        const speed = (index + 1) * 0.1;
-        particle.style.transform = `translateY(${rate * speed}px)`;
-    });
-});
+// (Scroll-triggered particle acceleration removed — handled by CSS)
 
 // ========================================
 // ENHANCED BACKGROUND ANIMATIONS
@@ -997,35 +1001,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Dynamic particle interaction with mouse
-document.addEventListener('mousemove', (e) => {
-    const particles = document.querySelectorAll('.particle');
-    const mouseX = e.clientX / window.innerWidth;
-    const mouseY = e.clientY / window.innerHeight;
-    
-    particles.forEach((particle, index) => {
-        const speed = (index + 1) * 2;
-        const x = (mouseX - 0.5) * speed;
-        const y = (mouseY - 0.5) * speed;
-        particle.style.transform = `translate(${x}px, ${y}px)`;
-    });
-});
+// Dynamic particle interaction with mouse (RAF-throttled, cached query)
+(function() {
+    const _particles = document.querySelectorAll('.particle');
+    let _mouseTicking = false;
+    document.addEventListener('mousemove', (e) => {
+        if (_mouseTicking || !_particles.length) return;
+        _mouseTicking = true;
+        requestAnimationFrame(() => {
+            const mx = e.clientX / window.innerWidth;
+            const my = e.clientY / window.innerHeight;
+            _particles.forEach((p, i) => {
+                const s = (i + 1) * 2;
+                p.style.transform = `translate(${(mx - 0.5) * s}px, ${(my - 0.5) * s}px)`;
+            });
+            _mouseTicking = false;
+        });
+    }, { passive: true });
+})();
 
-// Neural network pulse effect
-function createNeuralPulse() {
-    const connections = document.querySelectorAll('.connection');
-    connections.forEach((connection, index) => {
-        setTimeout(() => {
-            connection.style.animation = 'none';
-            setTimeout(() => {
-                connection.style.animation = 'connectionFlow 4s ease-in-out infinite';
-            }, 10);
-        }, index * 500);
-    });
-}
-
-// Trigger neural pulse every 10 seconds
-setInterval(createNeuralPulse, 10000);
+// Neural network pulse — let CSS handle the animation loop
+// (removed setInterval(createNeuralPulse, 10000) to reduce jank)
 
 // Enhanced particle interactions
 function enhanceParticles() {
@@ -1058,21 +1054,8 @@ function animateDataPoints() {
 // Trigger data point animations
 setTimeout(animateDataPoints, 3000);
 
-// Circuit pattern animation
-function animateCircuit() {
-    const circuit = document.querySelector('.circuit-svg rect');
-    if (circuit) {
-        setInterval(() => {
-            circuit.style.animation = 'none';
-            setTimeout(() => {
-                circuit.style.animation = 'circuitFade 10s ease-in-out infinite';
-            }, 10);
-        }, 10000);
-    }
-}
-
-// Start circuit animation
-setTimeout(animateCircuit, 1000);
+// Circuit animation — CSS handles the infinite loop
+// (removed JS setInterval that was resetting the animation)
 
 // Blob morphing enhancement
 function enhanceBlobs() {
@@ -1088,43 +1071,11 @@ function enhanceBlobs() {
 // Initialize enhanced blobs
 setTimeout(enhanceBlobs, 1500);
 
-// Energy wave burst effect
-function triggerWaveBurst() {
-    const waves = document.querySelectorAll('.wave');
-    waves.forEach((wave, index) => {
-        setTimeout(() => {
-            wave.style.animation = 'none';
-            setTimeout(() => {
-                wave.style.animation = 'waveExpand 6s ease-out infinite';
-            }, 10);
-        }, index * 200);
-    });
-}
+// Wave burst — CSS handles the animation loop
+// (removed setInterval(triggerWaveBurst, 15000) to reduce jank)
 
-// Trigger wave burst every 15 seconds
-setInterval(triggerWaveBurst, 15000);
-
-// Dynamic shape morphing
-function morphShapes() {
-    const shapes = document.querySelectorAll('.shape');
-    shapes.forEach((shape, index) => {
-        setTimeout(() => {
-            const shapes = [
-                'polygon(50% 0%, 0% 100%, 100% 100%)',
-                'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
-                'circle(50% at 50% 50%)',
-                'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
-                'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)',
-                'polygon(20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%, 0% 50%)'
-            ];
-            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-            shape.style.clipPath = randomShape;
-        }, index * 300);
-    });
-}
-
-// Morph shapes every 8 seconds
-setInterval(morphShapes, 8000);
+// Shape morphing — CSS handles this via shapeMorph keyframes
+// (removed setInterval(morphShapes, 8000) to reduce jank)
 
 // Floating back/forward arrows (global navigation)
 (function createNavArrows(){
