@@ -757,10 +757,12 @@
     </section>
 
     <script>
-    // GitHub Contribution Calendar — compact 6-month view with stats
+    // GitHub Contribution Calendar — responsive view with stats
     (function() {
         var USERNAME = 'Harshal-Bsys27';
-        var WEEKS_TO_SHOW = 26; // ~6 months — compact, less empty
+        // Responsive: show fewer weeks on narrow screens so chart fits without scroll
+        var screenW = window.innerWidth || document.documentElement.clientWidth;
+        var WEEKS_TO_SHOW = screenW <= 380 ? 16 : screenW <= 480 ? 20 : screenW <= 768 ? 22 : 26;
         var grid = document.getElementById('gh-grid');
         var monthsRow = document.getElementById('gh-months');
         var totalEl = document.getElementById('gh-total-count');
