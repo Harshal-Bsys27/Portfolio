@@ -3628,6 +3628,292 @@ body:not(.dark-theme) .cert-card:hover .skill-badge {
 }
 
 /* ========================================
+   GITHUB STATS SECTION
+   ======================================== */
+.github-stats {
+    background: var(--bg-dark);
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 0;
+}
+
+.github-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.github-orb-1 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--gradient-secondary);
+    top: -10%;
+    left: -5%;
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.github-orb-2 {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    background: var(--gradient-primary);
+    bottom: -10%;
+    right: -3%;
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.github-orb-3 {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: var(--gradient-accent);
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+}
+
+.github-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+    position: relative;
+    z-index: 1;
+    place-items: center;
+}
+
+.github-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(102, 126, 234, 0.15);
+    border-radius: 16px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    overflow: visible;
+    transition: all 0.4s cubic-bezier(0.22, 0.9, 0.32, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.github-card:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
+}
+
+.github-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.github-contribution {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(102, 126, 234, 0.15);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    margin: 2rem 0;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s ease;
+}
+
+.github-contribution:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
+}
+
+.contribution-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.contribution-graph {
+    overflow-x: auto;
+    border-radius: 8px;
+}
+
+.contribution-graph img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.contribution-graph-container {
+    width: 100%;
+}
+
+.contribution-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.contribution-label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.contribution-legend {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.contribution-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    transition: all 0.3s ease;
+}
+
+.contribution-box:hover {
+    transform: scale(1.2);
+    border-color: rgba(102, 126, 234, 0.4);
+}
+
+.contribution-graph-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.calendar-day {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.calendar-day:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 12px rgba(102, 126, 234, 0.4);
+}
+
+.contribution-calendar-full {
+    padding: 1.5rem;
+    background: rgba(13, 17, 23, 0.5);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    overflow-x: auto;
+}
+
+.calendar-months {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding: 0 32px;
+}
+
+.month-label {
+    font-size: 0.75rem;
+    color: #8b949e;
+    font-weight: 600;
+    padding: 0.25rem 0;
+}
+
+.calendar-days-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.calendar-day-labels {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding-top: 3px;
+    font-size: 0.7rem;
+    color: #8b949e;
+}
+
+.calendar-day-labels span {
+    height: 12px;
+    line-height: 12px;
+}
+
+.calendar-weeks {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.week {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.github-cta {
+    text-align: center;
+    padding: 2rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+.github-cta .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+}
+
+.github-cta .btn i {
+    font-size: 1.3rem;
+}
+
+/* Light theme overrides for GitHub stats */
+body:not(.dark-theme) .github-card,
+body:not(.dark-theme) .github-contribution {
+    background: rgba(102, 126, 234, 0.04);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+body:not(.dark-theme) .github-card:hover,
+body:not(.dark-theme) .github-contribution:hover {
+    background: rgba(102, 126, 234, 0.08);
+    border-color: rgba(102, 126, 234, 0.35);
+}
+
+body:not(.dark-theme) .contribution-label {
+    color: #57606a;
+}
+
+body:not(.dark-theme) .contribution-box {
+    border-color: rgba(102, 126, 234, 0.15);
+}
+
+body:not(.dark-theme) .contribution-calendar {
+    background: rgba(102, 126, 234, 0.04);
+}
+
+body:not(.dark-theme) .contribution-calendar-full {
+    background: rgba(102, 126, 234, 0.04);
+}
+
+/* ========================================
    CONTACT SECTION
    ======================================== */
 .contact {
@@ -5227,12 +5513,95 @@ body:not(.dark-theme) .cert-card:hover .skill-badge {
         padding: 0.3rem 0.6rem;
         font-size: 0.7rem;
     }
+
+    /* Optimize GitHub stats for mobile */
+    .github-stats {
+        padding: 3rem 0;
+    }
+
+    .github-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem 0;
+    }
+
+    .github-card {
+        padding: 1rem;
+    }
+
+    .github-contribution {
+        padding: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .contribution-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .github-orb-1, .github-orb-2, .github-orb-3 {
+        filter: blur(60px) !important;
+        opacity: 0.3 !important;
+    }
+
+    .contribution-header {
+        gap: 0.5rem;
+    }
+
+    .contribution-box {
+        width: 10px;
+        height: 10px;
+    }
+
+    .contribution-calendar {
+        padding: 1rem;
+    }
+
+    .calendar-day {
+        width: 18px;
+        height: 18px;
+    }
+
+    .contribution-calendar-full {
+        padding: 1rem;
+        overflow-x: auto;
+    }
+
+    .calendar-months {
+        padding: 0 20px;
+        gap: 0.5rem;
+    }
+
+    .month-label {
+        font-size: 0.65rem;
+    }
+
+    .calendar-day-labels {
+        font-size: 0.65rem;
+    }
+
+    .week {
+        gap: 0.25rem;
+    }
+
+    .calendar-weeks {
+        gap: 0.2rem;
+    }
+
 }
 
 /* Tablet optimizations */
 @media (max-width: 1024px) and (min-width: 769px) {
     .certifications-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .github-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .github-stats {
+        padding: 4rem 0;
     }
 }
 
