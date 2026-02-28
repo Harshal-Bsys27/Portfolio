@@ -253,45 +253,20 @@ let skillsAnimated = false;
 // Skills trigger is handled by the unified scroll handler above
 
 // ========================================
-// FORM SUBMISSION - open user's email client via mailto:
+// FORM SUBMISSION - Formspree integration
 // ========================================
 const contactForm = document.querySelector('.contact-form');
 
 contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const name = contactForm.querySelector('input[name="name"]').value.trim();
-    const email = contactForm.querySelector('input[name="email"]').value.trim();
-    const subject = contactForm.querySelector('input[name="subject"]').value.trim();
-    const message = contactForm.querySelector('textarea[name="message"]').value.trim();
-
-    if (!name || !email || !subject || !message) {
-        alert('Please fill in all fields before sending.');
-        return;
-    }
-
     const submitBtn = contactForm.querySelector('.btn-primary');
     const originalText = submitBtn.innerHTML;
-
-    // Build mailto link
-    const to = 'harshalbarhate2028@gmail.com';
-    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-    const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // Provide immediate feedback then open mail client
-    submitBtn.innerHTML = '<span>Opening mail client...</span> <i class="fas fa-paper-plane"></i>';
+    
+    // Show submission state
+    submitBtn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
     submitBtn.disabled = true;
-
-    // Open mail client (will open default email app)
-    window.location.href = mailto;
-
-    // Restore button after short delay (user can close or cancel their mail client)
-    setTimeout(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        // Optionally clear form
-        contactForm.reset();
-    }, 1500);
+    
+    // Formspree will handle the POST request and redirect to success page
+    // Form submission continues normally (no preventDefault)
 });
 
 // ========================================
