@@ -4266,28 +4266,6 @@ body:not(.dark-theme) .contribution-calendar-full {
         50% { transform: translateX(6px); }
     }
 
-    .hamburger {
-        display: flex;
-    }
-    
-    .nav-links {
-        position: fixed;
-        top: 80px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 80px);
-        background: rgba(15, 23, 42, 0.98);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 2rem;
-        gap: 1rem;
-        transition: left 0.3s;
-    }
-    
-    .nav-links.active {
-        left: 0;
-    }
-    
     .hero-title {
         font-size: 2.5rem;
     }
@@ -4757,14 +4735,7 @@ body:not(.dark-theme) .contribution-calendar-full {
         padding: 1.25rem;
     }
 
-    /* Adjust navigation */
-    .nav-links {
-        display: none; /* Hide on mobile, use hamburger */
-    }
-
-    .hamburger {
-        display: block;
-    }
+    /* Navigation handled by 768px media query */
 }
 
 @media (min-width: 769px) {
