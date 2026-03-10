@@ -3521,7 +3521,8 @@ body:not(.dark-theme) .contribution-calendar-full {
     justify-content: center;
     background: rgba(2,6,23,0.75);
     z-index: 20000;
-    padding: 2rem;
+    padding: 1rem;
+    backdrop-filter: blur(4px);
 }
 .video-modal.open { display: flex; }
 .video-modal-inner {
@@ -3529,20 +3530,56 @@ body:not(.dark-theme) .contribution-calendar-full {
     max-width: 1000px;
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     border-radius: 12px;
-    padding: 0.75rem;
+    padding: 1rem;
     position: relative;
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
-.video-wrapper iframe { width: 100%; height: 520px; border: 0; border-radius: 8px; display: block; }
+
+/* Video aspect ratio container for perfect scaling */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.video-wrapper iframe { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    border: 0; 
+    border-radius: 8px; 
+    display: block;
+}
+
 .modal-close {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    background: transparent;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0,0,0,0.5);
     color: var(--text-primary);
     border: none;
-    font-size: 2rem;
+    font-size: 1.8rem;
     line-height: 1;
     cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.modal-close:hover {
+    background: rgba(0,0,0,0.8);
+    transform: scale(1.1);
 }
 
 .project-image img {
@@ -4385,8 +4422,41 @@ body:not(.dark-theme) .contribution-calendar-full {
     }
 
     /* Make video modal and project modal scrollable and fit smaller screens */
-    .video-wrapper iframe { height: min(60vh, 420px); }
+    .video-modal {
+        padding: 0.75rem;
+    }
+    
+    .video-modal-inner {
+        padding: 0.75rem;
+        border-radius: 10px;
+    }
+    
+    .modal-close {
+        width: 36px;
+        height: 36px;
+        font-size: 1.5rem;
+        top: 0.25rem;
+        right: 0.25rem;
+    }
+    
     .project-modal-inner { max-height: 98vh; overflow-y: auto; padding: 0.5rem; }
+}
+
+/* Extra small screens (max 480px) */
+@media (max-width: 480px) {
+    .video-modal {
+        padding: 0.5rem;
+    }
+    
+    .video-modal-inner {
+        padding: 0.5rem;
+    }
+    
+    .modal-close {
+        width: 32px;
+        height: 32px;
+        font-size: 1.3rem;
+    }
 }
 
 /* Improve modal iframe sizing on large screens too (responsive) */
