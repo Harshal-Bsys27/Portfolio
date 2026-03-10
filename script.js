@@ -420,9 +420,10 @@ function openVideoModal(src) {
     videoWrapper.innerHTML = '';
     if (src && src !== '#') {
         const iframe = document.createElement('iframe');
-        iframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
-        iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+        iframe.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1&rel=0&modestbranding=1';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
         iframe.allowFullscreen = true;
+        iframe.setAttribute('loading', 'lazy');
         videoWrapper.appendChild(iframe);
     } else {
         const placeholder = document.createElement('div');
