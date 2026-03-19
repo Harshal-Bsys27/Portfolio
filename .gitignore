@@ -1,0 +1,15 @@
+# Ignore temporary Python helper scripts
+check_html.py
+
+# Common OS/editor artifacts
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
