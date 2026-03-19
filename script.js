@@ -390,6 +390,8 @@ if (!document.querySelector('link[href*="aos"]')) {
     document.head.appendChild(aosCSS);
 }
 
+// Profile editor removed — no-op placeholder to keep script continuity
+
 // ========================================
 // ABOUT: Read-more toggle and small animations
 // ========================================
