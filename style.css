@@ -618,6 +618,7 @@ body::before {
     padding: 1.5px;
     background: linear-gradient(135deg, #6366f1, #0d9488, #8b5cf6);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
@@ -2877,12 +2878,9 @@ section {
     flex-direction: column;
     gap: 1rem;
 }
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 1.1rem;
-    width: 100%;
-    height: 100%;
+
+.cert-card::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -2893,6 +2891,7 @@ section {
     transform-origin: left;
     transition: transform 0.3s ease;
     border-radius: 16px 16px 0 0;
+}
 
 .cert-card:hover {
     border-color: rgba(99, 102, 241, 0.3);
@@ -5466,28 +5465,6 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(99, 102, 241, 0.15);
     font-size: 1rem;
-}
-
-    display: flex;
-    gap: 0.6rem;
-    align-items: flex-start;
-    padding: 0.6rem 0.75rem;
-    border-radius: 16px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 10px 26px rgba(2,6,23,0.28);
-    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: cardSlideIn 0.8s ease-out forwards;
-    min-width: 0;
-    min-height: 52px;
-    height: 100%;
-    align-self: stretch;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    margin: 0;
-    line-height: 1.6;
 }
 
 .footer-text a {
