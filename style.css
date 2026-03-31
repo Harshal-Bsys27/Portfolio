@@ -2830,7 +2830,7 @@ section {
     top: -10%;
     left: -5%;
     border-radius: 50%;
-    blur-filter: blur(80px);
+    filter: blur(80px);
 }
 
 .cert-orb-2 {
@@ -2841,7 +2841,7 @@ section {
     bottom: -10%;
     right: -3%;
     border-radius: 50%;
-    blur-filter: blur(80px);
+    filter: blur(80px);
 }
 
 .cert-orb-3 {
@@ -2852,7 +2852,7 @@ section {
     top: 50%;
     left: 50%;
     border-radius: 50%;
-    blur-filter: blur(80px);
+    filter: blur(80px);
     opacity: 0.4;
 }
 
