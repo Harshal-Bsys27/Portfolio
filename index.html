@@ -16,8 +16,27 @@
     <!-- Preloader -->
     <div class="preloader">
         <div class="loader-wrapper">
-            <div class="loader-circle"></div>
-            <div class="loader-text">HB</div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring-2"></div>
+            <svg class="loader-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100px; height: 100px; z-index: 10; position: relative;">
+                <path d="M20 2 L36 11 L36 29 L20 38 L4 29 L4 11 Z" fill="url(#loaderLogoGrad)" stroke="url(#loaderLogoStroke)" stroke-width="0.8"/>
+                <path d="M11 12 L11 28" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M20 12 L20 28" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M11 20 L20 20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M20 12 Q28 12 28 16.5 Q28 20 20 20" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M20 20 Q29 20 29 24.5 Q29 28 20 28" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <defs>
+                    <linearGradient id="loaderLogoGrad" x1="0" y1="0" x2="40" y2="40">
+                        <stop offset="0%" stop-color="#0d9488"/>
+                        <stop offset="40%" stop-color="#0891b2"/>
+                        <stop offset="100%" stop-color="#6366f1"/>
+                    </linearGradient>
+                    <linearGradient id="loaderLogoStroke" x1="0" y1="0" x2="40" y2="40">
+                        <stop offset="0%" stop-color="rgba(13,148,136,0.4)"/>
+                        <stop offset="100%" stop-color="rgba(99,102,241,0.4)"/>
+                    </linearGradient>
+                </defs>
+            </svg>
         </div>
     </div>
 
