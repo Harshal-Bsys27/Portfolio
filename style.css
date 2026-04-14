@@ -315,6 +315,7 @@ body::before {
     justify-content: center;
     width: 300px;
     height: 300px;
+    overflow: visible;
 }
 
 .loader-ring {
@@ -330,6 +331,7 @@ body::before {
                 0 0 40px rgba(8, 145, 178, 0.4),
                 inset 0 0 20px rgba(99, 102, 241, 0.3);
     filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5));
+    will-change: transform;
 }
 
 .loader-ring-2 {
@@ -345,6 +347,7 @@ body::before {
                 0 0 30px rgba(99, 102, 241, 0.4),
                 inset 0 0 15px rgba(13, 148, 136, 0.3);
     filter: drop-shadow(0 0 8px rgba(13, 148, 136, 0.5));
+    will-change: transform;
 }
 
 .loader-logo {
@@ -380,26 +383,29 @@ body::before {
     .loader-wrapper {
         width: 250px;
         height: 250px;
+        overflow: visible;
     }
 
     .loader-ring {
         width: 130px;
         height: 130px;
         border: 2px solid transparent;
-        box-shadow: 0 0 16px rgba(99, 102, 241, 0.5),
-                    0 0 32px rgba(8, 145, 178, 0.3),
-                    inset 0 0 16px rgba(99, 102, 241, 0.25);
-        filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+        border-top-color: #6366f1;
+        border-right-color: #0891b2;
+        box-shadow: 0 0 16px rgba(99, 102, 241, 0.7),
+                    0 0 32px rgba(8, 145, 178, 0.5);
+        filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.6));
     }
 
     .loader-ring-2 {
         width: 100px;
         height: 100px;
         border: 2px solid transparent;
-        box-shadow: 0 0 12px rgba(13, 148, 136, 0.5),
-                    0 0 24px rgba(99, 102, 241, 0.3),
-                    inset 0 0 12px rgba(13, 148, 136, 0.25);
-        filter: drop-shadow(0 0 6px rgba(13, 148, 136, 0.4));
+        border-bottom-color: #0d9488;
+        border-left-color: #6366f1;
+        box-shadow: 0 0 12px rgba(13, 148, 136, 0.7),
+                    0 0 24px rgba(99, 102, 241, 0.5);
+        filter: drop-shadow(0 0 6px rgba(13, 148, 136, 0.6));
     }
 
     .loader-logo {
@@ -412,26 +418,31 @@ body::before {
     .loader-wrapper {
         width: 200px;
         height: 200px;
+        overflow: visible;
     }
 
     .loader-ring {
         width: 105px;
         height: 105px;
-        border: 1.5px solid transparent;
-        box-shadow: 0 0 12px rgba(99, 102, 241, 0.5),
-                    0 0 24px rgba(8, 145, 178, 0.3),
-                    inset 0 0 12px rgba(99, 102, 241, 0.2);
-        filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.4));
+        border: 2px solid #6366f1;
+        border-right-color: #0891b2;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        box-shadow: 0 0 12px rgba(99, 102, 241, 0.8),
+                    0 0 20px rgba(8, 145, 178, 0.6);
+        filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.7));
     }
 
     .loader-ring-2 {
         width: 80px;
         height: 80px;
-        border: 1.5px solid transparent;
-        box-shadow: 0 0 10px rgba(13, 148, 136, 0.5),
-                    0 0 18px rgba(99, 102, 241, 0.3),
-                    inset 0 0 10px rgba(13, 148, 136, 0.2);
-        filter: drop-shadow(0 0 5px rgba(13, 148, 136, 0.4));
+        border: 2px solid #0d9488;
+        border-left-color: #6366f1;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        box-shadow: 0 0 10px rgba(13, 148, 136, 0.8),
+                    0 0 16px rgba(99, 102, 241, 0.6);
+        filter: drop-shadow(0 0 5px rgba(13, 148, 136, 0.7));
     }
 
     .loader-logo {
@@ -444,18 +455,31 @@ body::before {
     .loader-wrapper {
         width: 180px;
         height: 180px;
+        overflow: visible;
     }
 
     .loader-ring {
         width: 95px;
         height: 95px;
-        border: 1.5px solid transparent;
+        border: 2px solid #6366f1;
+        border-right-color: #0891b2;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        box-shadow: 0 0 10px rgba(99, 102, 241, 0.8),
+                    0 0 16px rgba(8, 145, 178, 0.6);
+        filter: drop-shadow(0 0 5px rgba(99, 102, 241, 0.7));
     }
 
     .loader-ring-2 {
         width: 72px;
         height: 72px;
-        border: 1.5px solid transparent;
+        border: 2px solid #0d9488;
+        border-left-color: #6366f1;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        box-shadow: 0 0 8px rgba(13, 148, 136, 0.8),
+                    0 0 12px rgba(99, 102, 241, 0.6);
+        filter: drop-shadow(0 0 4px rgba(13, 148, 136, 0.7));
     }
 
     .loader-logo {
