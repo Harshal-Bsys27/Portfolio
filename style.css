@@ -2773,17 +2773,31 @@ section {
 .skill-icon.cv { background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); }
 .skill-icon.ml { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
 .skill-icon.react { background: linear-gradient(135deg, #61dafb 0%, #282c34 100%); }
+.skill-icon.nextjs { background: linear-gradient(135deg, #111827 0%, #374151 100%); }
+.skill-icon.typescript { background: linear-gradient(135deg, #3178c6 0%, #255f9d 100%); }
 .skill-icon.html { background: linear-gradient(135deg, #e34f26 0%, #f16529 100%); }
 .skill-icon.css { background: linear-gradient(135deg, #1572b6 0%, #33a9dc 100%); }
 .skill-icon.bootstrap { background: linear-gradient(135deg, #7952b3 0%, #563d7c 100%); }
+.skill-icon.tailwind { background: linear-gradient(135deg, #06b6d4 0%, #0f766e 100%); }
 .skill-icon.flask { background: linear-gradient(135deg, #000000 0%, #4d4d4d 100%); }
 .skill-icon.api { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); }
 .skill-icon.jwt { background: linear-gradient(135deg, #d63aff 0%, #b026d6 100%); }
 .skill-icon.postman { background: linear-gradient(135deg, #ff6c37 0%, #ff4500 100%); }
+.skill-icon.fastapi { background: linear-gradient(135deg, #009688 0%, #0f766e 100%); }
 .skill-icon.mongodb { background: linear-gradient(135deg, #4db33d 0%, #3b8686 100%); }
 .skill-icon.sqlite { background: linear-gradient(135deg, #003b57 0%, #005f8a 100%); }
 .skill-icon.workbench { background: linear-gradient(135deg, #00758f 0%, #f29111 100%); }
 .skill-icon.git { background: linear-gradient(135deg, #f14e32 0%, #e84d3d 100%); }
+.skill-icon.postgres { background: linear-gradient(135deg, #336791 0%, #2d4a6b 100%); }
+.skill-icon.mobile { background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%); }
+.skill-icon.docker { background: linear-gradient(135deg, #0db7ed 0%, #0b6fa4 100%); }
+.skill-icon.kubernetes { background: linear-gradient(135deg, #326ce5 0%, #1d4ed8 100%); }
+.skill-icon.vercel { background: linear-gradient(135deg, #000000 0%, #4b5563 100%); }
+.skill-icon.githubactions { background: linear-gradient(135deg, #24292f 0%, #3b82f6 100%); }
+.skill-icon.redis { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
+.skill-icon.figma { background: linear-gradient(135deg, #ff7262 0%, #ff4f5a 100%); }
+.skill-icon.cicd { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+.skill-icon.langchain { background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%); }
 
 .skill-card h4 {
     font-size: 1.35rem;
@@ -3112,6 +3126,13 @@ section {
 
 .cert-date i {
     color: var(--accent);
+}
+
+.cert-description {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
 }
 
 .cert-skills {
